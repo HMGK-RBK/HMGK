@@ -18,6 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./react-client/dist"));
 
+app.get("/", (req, res) => {
+  
+})
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
