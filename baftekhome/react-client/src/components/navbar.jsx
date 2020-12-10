@@ -4,7 +4,9 @@ const Navbar = (props) => {
   if (!props.isLoggedIn) {
     return (
       <div className="navContainer">
-        <h1 id="homeBtn">Baftek Home</h1>
+        <h1 id="homeBtn" onClick={() => this.setState({ view: "home" })}>
+          Baftek Home
+        </h1>
         <div className="navAuthContainer">
           <h2 id="logBtn" className="authBtn">
             Login
@@ -18,7 +20,9 @@ const Navbar = (props) => {
   } else {
     return (
       <div className="navContainer">
-        <h1 id="homeBtn">Baftek Home</h1>
+        <h1 id="homeBtn" onClick={() => this.setState({ view: "home" })}>
+          Baftek Home
+        </h1>
         <div className="navPosts">
           <h2 id="postBtn" className="userNav">
             Post homes

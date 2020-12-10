@@ -7,16 +7,19 @@ class App extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      isLoggedIn: false
+      isLoggedIn: false,
+      view: "home"
     };
   }
   render() {
-    return (
-      <div>
-        <Navbar isLoggedIn={this.state.isLoggedIn} />
-        <Home />
-      </div>
-    );
+    if (this.state.view === "home") {
+      return (
+        <div>
+          <Navbar isLoggedIn={this.state.isLoggedIn} />
+          <Home />
+        </div>
+      );
+    }
   }
 }
 
