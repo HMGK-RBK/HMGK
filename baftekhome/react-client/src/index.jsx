@@ -1,14 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./components/home.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 class App extends React.Component {
   constructor(props) {
     super();
-    this.state = {};
+    this.state = {
+      isLoggedIn: false
+    };
   }
   render() {
-    return <Home />;
+    return (
+      <div>
+        <Navbar isLoggedIn={this.state.isLoggedIn} />
+        <Home />
+      </div>
+    );
   }
 }
 
