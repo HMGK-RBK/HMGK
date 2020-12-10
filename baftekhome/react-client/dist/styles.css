@@ -1,0 +1,65 @@
+body {
+  margin: 0px;
+  color: rgb(226, 226, 226);
+  background-color: rgb(226, 226, 226);
+}
+@font-face {
+  font-family: myFirstFont;
+  src: url(sansation_light.woff);
+}
+
+* {
+  font-family: myFirstFont;
+}
+
+.navContainer {
+  background-color: rgba(51, 124, 148, 0.623);
+  display: flex;
+  height: 70px;
+}
+
+.navAuthContainer {
+  display: flex;
+  position: relative;
+  left: 75%;
+  margin-top: 1%;
+}
+
+.navPosts {
+  display: flex;
+  position: relative;
+  left: 65%;
+  margin-top: 1%;
+  width: 30%;
+}
+
+.userNav {
+  margin: 2%;
+  cursor: pointer;
+}
+
+.userNava:hover {
+  color: white;
+}
+
+.authBtn:hover {
+  color: white;
+}
+
+.authBtn {
+  margin: 2%;
+  cursor: pointer;
+}
+
+#logBtn {
+  margin-right: 20%;
+}
+
+#homeBtn {
+  cursor: pointer;
+  margin-left: 2%;
+}
+
+#homeBtn:hover {
+  color: white;
+}
