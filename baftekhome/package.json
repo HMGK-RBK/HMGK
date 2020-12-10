@@ -1,0 +1,46 @@
+{
+  "name": "baftekhome",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.0",
+    "jquery": "^3.1.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.10.16",
+    "prop-types": "^15.7.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "socket.io": "^3.0.3",
+    "socket.io-client": "^3.0.3"
+  },
+  "scripts": {
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/index.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
