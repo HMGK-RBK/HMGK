@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./components/home.jsx";
-//import HomeList from "./components/homeList.jsx";
 import Navbar from "./components/Navbar.jsx";
 
 class App extends React.Component {
