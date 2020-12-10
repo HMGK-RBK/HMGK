@@ -5,12 +5,13 @@ import Navbar from "./components/Navbar.jsx";
 
 class App extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       isLoggedIn: false,
       view: "home"
     };
   }
+
   render() {
     if (this.state.view === "home") {
       return (
