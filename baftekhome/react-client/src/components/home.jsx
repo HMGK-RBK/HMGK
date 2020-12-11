@@ -14,6 +14,7 @@ class Home extends React.Component {
     };
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
+    this.deleteHome = this.deleteHome.bind(this);
   }
 
   componentDidMount() {
@@ -63,13 +64,13 @@ class Home extends React.Component {
       return (
         <div>
           {this.state.homes.map((home, index) => (
-            <HomeList home={home} key={index} getImages={this.getAllHomeImgs} />
+            <HomeList home={home} key={index} getImages={this.getAllHomeImgs} deleteHome={this.deleteHome}/>
           ))}
         </div>
       );
     } else if (this.state.view1 === "homedetail") {
       return <HomeDetail />;
-    }
+    }    
   }
 }
 export default Home;

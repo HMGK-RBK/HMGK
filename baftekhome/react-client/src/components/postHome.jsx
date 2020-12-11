@@ -22,7 +22,7 @@ class PostHome extends React.Component {
       console.log(response);
     });
   }
-
+  
   render() {
     return (
       <div>
