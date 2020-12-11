@@ -1,16 +1,12 @@
 import React from "react";
 import axios from "axios";
+import $ from "jquery";
 
 class PostHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      image: "",
-      description: "",
-      location: "",
-      category: "",
-      contactInformation: ""
+      data: []
     };
   }
   postHomes(image, description, location, category, contactInformation) {
@@ -21,13 +17,34 @@ class PostHome extends React.Component {
       category: category,
       contactInformation: contactInformation
     };
-    var arr = this.state.data;
-    arr.push(obj);
-    axios.post("/api/homes").then(({ data }) => {});
+
+    axios.post("/api/homes", obj).then(function (response) {
+      console.log(response);
+    });
   }
 
   render() {
-    return;
+    return (
+      <div>
+        <input id="image" />
+        <input id="description" />
+        <input id="location" />
+        <input id="category" />
+        <input id="contactInformation" />
+        <button
+          onClick={() => {
+            this.postHomes(
+              $("#image").val(),
+              $("#description").val(),
+              $("#location").val(),
+              $("#category").val(),
+              $("#contactInformation").val()
+            );
+          }}>
+          submit
+        </button>
+      </div>
+    );
   }
 }
 export default PostHome;
