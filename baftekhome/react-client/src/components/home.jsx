@@ -32,7 +32,7 @@ class Home extends React.Component {
         this.setState({
           homes: newHomes
         });
-      });
+    });
   }
 
   render() {
