@@ -33,30 +33,27 @@ class Home extends React.Component {
       this.setState({
         images: data
       });
-      console.log(this.state.images);
-    });
-
-    axios.get(`/api/homes/${id}`).then(({ data }) => {
-      this.setState({
-        home: data,
-        view: "homedetail"
+      axios.get(`/api/homes/${id}`).then(({ data }) => {
+        this.setState({
+          home: data,
+          view1: "homedetail"
+        });
       });
-      console.log(this.state.home);
     });
   }
 
-  // deleteHome(event) {
-  //   var index = event.target.id;
-  //   axios
-  //     .delete(`/api/homes/${this.state.homes[index]._id}`)
-  //     .then(({ data }) => {
-  //       this.state.homes.splice(index, 1);
-  //       let newHomes = this.state.homes;
-  //       this.setState({
-  //         homes: newHomes
-  //       });
-  //     });
-  // }
+  deleteHome(event) {
+    var index = event.target.id;
+    axios
+      .delete(`/api/homes/${this.state.homes[index]._id}`)
+      .then(({ data }) => {
+        this.state.homes.splice(index, 1);
+        let newHomes = this.state.homes;
+        this.setState({
+          homes: newHomes
+        });
+      });
+  }
 
   render() {
     if (this.state.view1 === "home") {
@@ -68,7 +65,11 @@ class Home extends React.Component {
         </div>
       );
     } else if (this.state.view1 === "homedetail") {
-      return <HomeDetail />;
+      return (
+        <div>
+          <HomeDetail images={this.state.images} home={this.state.home} />
+        </div>
+      );
     }
   }
 }
