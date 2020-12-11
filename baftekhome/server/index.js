@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const port = 3000;
 
 const Home = require("../database/homes.js");
+const Image = require("../database/images.js");
 
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
@@ -27,6 +28,18 @@ app.use(bodyParser.json());
 app.set("views", path.join(__dirname, "./react-client/dist"));
 app.use(express.static("./react-client/dist"));
 
+app.get("/api/images/:_id", (req, res) => {
+  Image.find({ homeID: req.params._id }, (err, docs) => {
+    res.send(docs);
+  });
+});
+
+app.get("/api/homes/:_id", (req, res) => {
+  Home.find({ _id: req.params._id }, (err, docs) => {
+    res.send(docs);
+  });
+});
+
 app.get("/api/homes", (req, res) => {
   Home.find()
     .then((result) => {
@@ -36,6 +49,7 @@ app.get("/api/homes", (req, res) => {
       res.send(err);
     });
 });
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
