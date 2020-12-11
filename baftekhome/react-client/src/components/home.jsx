@@ -15,6 +15,7 @@ class Home extends React.Component {
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
 
+
     this.deleteHome = this.deleteHome.bind(this);
   }
 

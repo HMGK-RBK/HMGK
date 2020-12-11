@@ -3,9 +3,13 @@ const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt");
 const port = 3000;
 
 const Home = require("../database/homes.js");
+
+const Users = require("../database/users.js");
+
 const Image = require("../database/images.js");
 
 mongoose.set("useCreateIndex", true);
@@ -27,6 +31,37 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("views", path.join(__dirname, "./react-client/dist"));
 app.use(express.static("./react-client/dist"));
+
+app.post("/api/newuser", (req, res) => {
+  const saltRounds = 10;
+  var obj = req.body;
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    if (err) {
+      throw err;
+    }
+    bcrypt.hash(req.body.password, salt, (err, hash) => {
+      obj.password = hash;
+      Users.create(obj);
+    });
+  });
+});
+
+app.post("/api/users", (req, res) => {
+  Users.find({ email: req.body.email }, function (err, docs) {
+    if (err) {
+      console.log(err);
+    }
+    bcrypt.compare(req.body.password, docs[0].password, function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+      if (result) {
+        res.send(docs);
+      }
+    });
+  });
+});
+
 
 app.get("/api/images/:_id", (req, res) => {
   Image.find({ homeID: req.params._id }, (err, docs) => {
