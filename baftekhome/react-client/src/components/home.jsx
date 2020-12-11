@@ -45,18 +45,18 @@ class Home extends React.Component {
     });
   }
 
-  // deleteHome(event) {
-  //   var index = event.target.id;
-  //   axios
-  //     .delete(`/api/homes/${this.state.homes[index]._id}`)
-  //     .then(({ data }) => {
-  //       this.state.homes.splice(index, 1);
-  //       let newHomes = this.state.homes;
-  //       this.setState({
-  //         homes: newHomes
-  //       });
-  //     });
-  // }
+  deleteHome(event) {
+    var index = event.target.id;
+    axios
+      .delete(`/api/homes/${this.state.homes[index]._id}`)
+      .then(({ data }) => {
+        this.state.homes.splice(index, 1);
+        let newHomes = this.state.homes;
+        this.setState({
+          homes: newHomes
+        });
+      });
+  }
 
   render() {
     if (this.state.view1 === "home") {
