@@ -7,7 +7,7 @@ var homeSchema = mongoose.Schema({
   price: Number,
   contactInformation: String,
   category: String
-});
+  });
 
 var Home = mongoose.model("Home", homeSchema);
 
