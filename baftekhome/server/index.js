@@ -51,8 +51,15 @@ app.get("/api/homes", (req, res) => {
 });
 
 app.post("/api/homes", (req, res) => {
-  console.log(req.body);
-});
+  console.log("hey",req.body);
+  Home.create(req.body)
+  .then((result) => {
+    res.send(result);
+  })
+  .catch((err) => {
+    res.send(err);
+  });
+  });
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
