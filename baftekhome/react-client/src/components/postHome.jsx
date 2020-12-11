@@ -9,14 +9,15 @@ class PostHome extends React.Component {
       data: []
     };
   }
-  postHomes(image, description, location, category, contactInformation, price) {
+  postHomes(image, description, location, category, contactInformation, price, userName) {
     var obj = {
       image: image,
       description: description,
       location: location,
       category: category,
       contactInformation: contactInformation,
-      price: price
+      price: price,
+      userName: userName
     };
 
     axios.post("/api/homes", obj).then(function (response) {
