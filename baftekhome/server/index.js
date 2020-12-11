@@ -28,14 +28,17 @@ app.use(bodyParser.json());
 app.set("views", path.join(__dirname, "./react-client/dist"));
 app.use(express.static("./react-client/dist"));
 
-app.get("/api/images/:_id", (req, res)=>{
-  Image.find({homeID:req.params._id}, (err, res)=> {
-    console.log(res)
-  })
-  Home.find({_id:req.params._id}, (err, res)=>{
-    console.log("home", res)
-  })
-})
+app.get("/api/images/:_id", (req, res) => {
+  Image.find({ homeID: req.params._id }, (err, docs) => {
+    res.send(docs);
+  });
+});
+
+app.get("/api/homes/:_id", (req, res) => {
+  Home.find({ _id: req.params._id }, (err, docs) => {
+    res.send(docs);
+  });
+});
 
 app.get("/api/homes", (req, res) => {
   Home.find()

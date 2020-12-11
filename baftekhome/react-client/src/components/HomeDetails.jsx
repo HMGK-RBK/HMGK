@@ -7,21 +7,8 @@ class HomeDetail extends React.Component {
     this.state = {
       images: [],
     } 
-    this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
   }
 
-  componentDidMount(){
-    this.getAllHomeImgs
-  }
- 
-  getAllHomeImgs(id){
-    axios.get(`/api/images/${id}`).then(({ data }) => {
-      this.setState({
-        images: data
-      });
-      console.log(this.state.images);
-    });
-  }
  
   render() {
     return (
