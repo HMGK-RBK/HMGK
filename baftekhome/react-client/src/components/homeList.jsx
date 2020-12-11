@@ -14,7 +14,9 @@ class Homelist extends React.Component {
           onClick={() => this.props.getImages(this.props.home._id)}
         />
         <p>{this.props.home.description}</p>
-        <p>{this.props.home.location}</p>
+        <p onClick={() => this.props.getImages(this.props.home._id)}>
+          {this.props.home.location}
+        </p>
         <p>{this.props.home.category}</p>
         <p>{this.props.home.contactInformation}</p>
       </div>

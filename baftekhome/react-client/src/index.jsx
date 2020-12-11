@@ -10,17 +10,23 @@ class App extends React.Component {
       isLoggedIn: true,
       view: "home"
     };
+    this.changeView = this.changeView.bind(this);
+  }
+  changeView(view) {
+    this.setState({ view: view });
   }
 
   render() {
-    if (this.state.view === "home") {
-      return (
-        <div>
-          <Navbar isLoggedIn={this.state.isLoggedIn} />
-          <Home />
-        </div>
-      );
-    }
+    return (
+      <div>
+        <Navbar
+          view={this.state.view}
+          isLoggedIn={this.state.isLoggedIn}
+          changeView={this.changeView}
+        />
+        <Home view={this.state.view} changeView={this.changeView} />
+      </div>
+    );
   }
 }
 
