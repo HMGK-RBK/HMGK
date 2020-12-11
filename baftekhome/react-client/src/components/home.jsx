@@ -33,15 +33,12 @@ class Home extends React.Component {
       this.setState({
         images: data
       });
-      console.log(this.state.images);
-    });
-
-    axios.get(`/api/homes/${id}`).then(({ data }) => {
-      this.setState({
-        home: data,
-        view: "homedetail"
+      axios.get(`/api/homes/${id}`).then(({ data }) => {
+        this.setState({
+          home: data,
+          view1: "homedetail"
+        });
       });
-      console.log(this.state.home);
     });
   }
 
@@ -68,7 +65,11 @@ class Home extends React.Component {
         </div>
       );
     } else if (this.state.view1 === "homedetail") {
-      return <HomeDetail />;
+      return (
+        <div>
+          <HomeDetail images={this.state.images} home={this.state.home} />
+        </div>
+      );
     }
   }
 }

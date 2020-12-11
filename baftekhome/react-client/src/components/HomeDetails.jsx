@@ -1,23 +1,18 @@
 import React from "react";
-import axios from "axios";
 
-class HomeDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      images: [],
-    } 
-  }
+const HomeDetail = function (props) {
+  return (
+    <div>
+      <img src={props.images[0].image1} />
+      <img src={props.images[0].image2} />
+      <img src={props.images[0].image3} />
+      <h2>Apartment for Sale at {props.home[0].location}</h2>
+      <h2>Categroy: {props.home[0].category}</h2>
+      <h4>Description: {props.home[0].description}</h4>
+      <h4>Price: {props.home[0].price} $</h4>
+      <h4>Contact Information: {props.home[0].contactInformation}</h4>
+    </div>
+  );
+};
 
- 
-  render() {
-    return (
-      <div>
-        <h4 className="">Apartment for Sale at</h4>
-        <img className="" />
-      </div>
-    )
-  }
-}
-
-export default HomeDetail
+export default HomeDetail;
