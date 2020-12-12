@@ -11,7 +11,6 @@ class PostHome extends React.Component {
     };
   }
   postHomes(
-    image,
     description,
     location,
     category,
@@ -69,7 +68,6 @@ class PostHome extends React.Component {
         <button
           onClick={() => {
             this.postHomes(
-              $("#image").files,
               $("#description").val(),
               $("#location").val(),
               $("#category").val(),
