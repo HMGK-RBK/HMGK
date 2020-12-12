@@ -8,12 +8,17 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLoggedIn: false,
-      view: "home"
+      view: "home",
+      user: undefined
     };
+    this.getUser = this.getUser.bind(this);
     this.changeView = this.changeView.bind(this);
   }
   changeView(view) {
     this.setState({ view: view });
+  }
+  getUser(obj) {
+    this.setState({ user: obj });
   }
 
   render() {
@@ -21,10 +26,15 @@ class App extends React.Component {
       <div>
         <Navbar
           view={this.state.view}
-          isLoggedIn={this.state.isLoggedIn}
+          isLoggedIn={this.state.user}
           changeView={this.changeView}
         />
-        <Home view={this.state.view} changeView={this.changeView} />
+        <Home
+          view={this.state.view}
+          changeView={this.changeView}
+          getUser={this.getUser}
+          user={this.state.user}
+        />
       </div>
     );
   }

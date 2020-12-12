@@ -42,6 +42,7 @@ app.post("/api/newuser", (req, res) => {
     bcrypt.hash(req.body.password, salt, (err, hash) => {
       obj.password = hash;
       Users.create(obj);
+      res.end();
     });
   });
 });
@@ -61,7 +62,6 @@ app.post("/api/users", (req, res) => {
     });
   });
 });
-
 
 app.get("/api/images/:_id", (req, res) => {
   Image.find({ homeID: req.params._id }, (err, docs) => {
@@ -86,15 +86,20 @@ app.get("/api/homes", (req, res) => {
 });
 
 app.post("/api/homes", (req, res) => {
-  console.log("hey",req.body);
   Home.create(req.body)
-  .then((result) => {
-    res.send(result);
-  })
-  .catch((err) => {
-    res.send(err);
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get("/api/userHomes/:userName", (req, res) => {
+  Home.find({ userName: req.params.userName }, function (err, docs) {
+    res.send(docs);
   });
-  });
+});
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
