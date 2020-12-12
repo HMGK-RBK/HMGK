@@ -10,14 +10,8 @@ class PostHome extends React.Component {
       image: ""
     };
   }
-  postHomes(
-    description,
-    location,
-    category,
-    contactInformation,
-    price,
-    userName
-  ) {
+
+  postHomes(description, location, category, contactInformation, price) {
     let config = {
       headers: {
         Authorization: "Client-ID 884e577759efe90"
@@ -32,14 +26,17 @@ class PostHome extends React.Component {
         config
       )
       .then((res) => {
+        var firstName = this.props.user[0].firstName;
+        var lastName = this.props.user[0].lastName;
         var obj = {
+          firstName: firstName,
+          lastName: lastName,
           image: res.data.data.link,
           description: description,
           location: location,
           category: category,
           contactInformation: contactInformation,
-          price: price,
-          userName: userName
+          price: price
         };
         axios.post("/api/homes", obj).then(function (response) {
           console.log(response);

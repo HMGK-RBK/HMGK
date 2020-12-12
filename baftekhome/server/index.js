@@ -95,6 +95,12 @@ app.post("/api/homes", (req, res) => {
     });
 });
 
+app.get("/api/userHomes/:userName", (req, res) => {
+  Home.find({ userName: req.params.userName }, function (err, docs) {
+    res.send(docs);
+  });
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });

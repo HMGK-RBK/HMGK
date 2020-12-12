@@ -33,6 +33,7 @@ class App extends React.Component {
           view={this.state.view}
           changeView={this.changeView}
           getUser={this.getUser}
+          user={this.state.user}
         />
       </div>
     );
