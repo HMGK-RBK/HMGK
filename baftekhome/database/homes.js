@@ -9,6 +9,7 @@ var homeSchema = mongoose.Schema({
   category: String,
   userName:{
     type:String,
+    require: true,
     unique:true
   }
   });
