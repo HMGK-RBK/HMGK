@@ -12,14 +12,6 @@ class LogIn extends React.Component {
     };
   }
 
-// checkUser(){
-//   $.ajax({
-//     method:'GET',
-//     url:`/api/users`
-//   }).done((data) => {
-//     console.log(data);
-//   })
-// }
 
   checkUser(email,password) {
     var obj = {
