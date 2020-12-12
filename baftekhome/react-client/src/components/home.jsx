@@ -16,7 +16,6 @@ class Home extends React.Component {
     };
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
-
     this.deleteHome = this.deleteHome.bind(this);
   }
 
@@ -88,7 +87,10 @@ class Home extends React.Component {
     } else if (this.props.view === "login") {
       return (
         <div>
-          <LogIn changeView={this.props.changeView} />
+          <LogIn
+            changeView={this.props.changeView}
+            getUser={this.props.getUser}
+          />
         </div>
       );
     } else if (this.props.view === "signup") {
