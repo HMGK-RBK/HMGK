@@ -6,8 +6,13 @@ var homeSchema = mongoose.Schema({
   description: String,
   price: Number,
   contactInformation: String,
-  category: String
-});
+  category: String,
+  userName:{
+    type:String,
+    require: true,
+    unique:true
+  }
+  });
 
 var Home = mongoose.model("Home", homeSchema);
 

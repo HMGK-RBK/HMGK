@@ -4,14 +4,20 @@ const Navbar = (props) => {
   if (!props.isLoggedIn) {
     return (
       <div className="navContainer">
-        <h1 id="homeBtn" onClick={() => this.setState({ view: "home" })}>
+        <h1 id="homeBtn" onClick={() => props.changeView("home")}>
           Baftek Home
         </h1>
         <div className="navAuthContainer">
-          <h2 id="logBtn" className="authBtn">
+          <h2
+            id="logBtn"
+            className="authBtn"
+            onClick={() => props.changeView("login")}>
             Login
           </h2>
-          <h2 id="signBtn" className="authBtn">
+          <h2
+            id="signBtn"
+            className="authBtn"
+            onClick={() => props.changeView("signup")}>
             Signup
           </h2>
         </div>
@@ -20,14 +26,20 @@ const Navbar = (props) => {
   } else {
     return (
       <div className="navContainer">
-        <h1 id="homeBtn" onClick={() => this.setState({ view: "home" })}>
+        <h1 id="homeBtn" onClick={() => props.changeView("home")}>
           Baftek Home
         </h1>
         <div className="navPosts">
-          <h2 id="postBtn" className="userNav">
+          <h2
+            id="postBtn"
+            className="userNav"
+            onClick={() => props.changeView("post")}>
             Post homes
           </h2>
-          <h2 id="seeAllBtn" className="userNav">
+          <h2
+            id="seeAllBtn"
+            className="userNav"
+            onClick={() => props.changeView("myposts")}>
             See my posted homes
           </h2>
         </div>
