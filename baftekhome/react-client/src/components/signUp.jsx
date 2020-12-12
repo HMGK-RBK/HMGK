@@ -21,8 +21,9 @@ class SignUp extends React.Component {
       method: "POST",
       url: "/api/newuser",
       data: JSON.stringify(obj),
-      contentType: "application/json",
-      success: () => this.props.changeView("login")
+      contentType: "application/json"
+    }).done(() => {
+      this.props.changeView("login");
     });
   }
 

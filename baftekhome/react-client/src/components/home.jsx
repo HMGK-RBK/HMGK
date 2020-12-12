@@ -5,7 +5,7 @@ import PostHome from "./PostHome.jsx";
 import axios from "axios";
 import LogIn from "./login.jsx";
 import SignUp from "./signUp.jsx";
-import UserPostedHome from "./UserPostedHome.jsx"
+import UserPostedHome from "./UserPostedHome.jsx";
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,12 +14,11 @@ class Home extends React.Component {
       homes: [],
       images: [],
       home: [],
-      userHomes:[]
+      userHomes: []
     };
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
     this.getUserHomes = this.getUserHomes.bind(this);
-    // this.deleteHome = this.deleteHome.bind(this);
   }
 
   componentDidMount() {
@@ -60,7 +59,7 @@ class Home extends React.Component {
   //       });
   //     });
   // }
-  getUserHomes(){
+  getUserHomes() {
     axios.get(`/api/homes/${userName}`).then(({ data }) => {
       this.setState({
         userHomes: data
@@ -92,13 +91,16 @@ class Home extends React.Component {
     } else if (this.props.view === "post") {
       return (
         <div>
-          <PostHome />
+          <PostHome user={this.props.user} />
         </div>
       );
     } else if (this.props.view === "login") {
       return (
         <div>
-          <LogIn changeView={this.props.changeView} />
+          <LogIn
+            changeView={this.props.changeView}
+            getUser={this.props.getUser}
+          />
         </div>
       );
     } else if (this.props.view === "signup") {
@@ -112,7 +114,7 @@ class Home extends React.Component {
         <div>
           <UserPostedHome changeView={this.props.changeView} />
         </div>
-      )
+      );
     }
   }
 }
