@@ -13,12 +13,13 @@ class Homelist extends React.Component {
           src={this.props.home.image}
           onClick={() => this.props.getImages(this.props.home._id)}
         />
-        <p>{this.props.home.description}</p>
+        <p>description: {this.props.home.description}</p>
         <p onClick={() => this.props.getImages(this.props.home._id)}>
           {this.props.home.location}
         </p>
-        <p>{this.props.home.category}</p>
-        <p>{this.props.home.contactInformation}</p>
+        <p>category: {this.props.home.category}</p>
+        <p>price: {this.props.home.price} $</p>
+        <p>contact information: {this.props.home.contactInformation}</p>
       </div>
     );
   }

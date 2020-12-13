@@ -38,8 +38,9 @@ class PostHome extends React.Component {
           contactInformation: contactInformation,
           price: price
         };
-        axios.post("/api/homes", obj).then(function (response) {
-          console.log(response);
+        axios.post("/api/homes", obj).then(() => {
+          this.props.fetchHomes();
+          this.props.changeView("home")
         });
       });
   }
@@ -63,6 +64,7 @@ class PostHome extends React.Component {
         <input placeholder="contactInformation" id="contactInformation" />
         <input placeholder="price" id="price" />
         <button
+          changeView={this.props.changeView}
           onClick={() => {
             this.postHomes(
               $("#description").val(),

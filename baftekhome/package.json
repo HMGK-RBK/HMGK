@@ -10,14 +10,14 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "bcrypt": "^5.0.0",
     "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.0",
     "jquery": "^3.5.1",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.10.16",
-    "nodemon": "^2.0.6",
     "prop-types": "^15.7.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
