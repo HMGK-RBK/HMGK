@@ -13,7 +13,7 @@ class Home extends React.Component {
     this.state = {
       homes: [],
       images: [],
-      home: [],
+      homeDetails: []
     };
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
@@ -38,13 +38,12 @@ class Home extends React.Component {
       });
       axios.get(`/api/homes/${id}`).then(({ data }) => {
         this.setState({
-          home: data
+          homeDetails: data
         });
         this.props.changeView("homedetails");
       });
     });
   }
-
 
   render() {
     if (this.props.view === "home") {
@@ -63,13 +62,21 @@ class Home extends React.Component {
     } else if (this.props.view === "homedetails") {
       return (
         <div>
-          <HomeDetail images={this.state.images} home={this.state.home} />
+          <HomeDetail
+            images={this.state.images}
+            home={this.state.homeDetails}
+          />
         </div>
       );
     } else if (this.props.view === "post") {
       return (
         <div>
-          <PostHome user={this.props.user} />
+          <PostHome
+            user={this.props.user}
+            fetchHomes={this.fetchHomes}
+            getAllHomeImgs={this.getAllHomeImgs}
+            changeView={this.props.changeView}
+          />
         </div>
       );
     } else if (this.props.view === "login") {
@@ -90,7 +97,11 @@ class Home extends React.Component {
     } else if (this.props.view === "myposts") {
       return (
         <div>
-          <UserPostedHome changeView={this.props.changeView} user={this.props.user} />
+          <UserPostedHome
+            changeView={this.props.changeView}
+            user={this.props.user}
+            fetchHomes={this.fetchHomes}
+          />
         </div>
       );
     }
