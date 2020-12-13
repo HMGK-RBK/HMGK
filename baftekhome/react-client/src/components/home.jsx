@@ -75,6 +75,7 @@ class Home extends React.Component {
             user={this.props.user}
             fetchHomes={this.fetchHomes}
             getAllHomeImgs={this.getAllHomeImgs}
+            changeView={this.props.changeView}
           />
         </div>
       );
@@ -99,6 +100,7 @@ class Home extends React.Component {
           <UserPostedHome
             changeView={this.props.changeView}
             user={this.props.user}
+            fetchHomes={this.fetchHomes}
           />
         </div>
       );

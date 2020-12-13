@@ -51,6 +51,28 @@ class PostHome extends React.Component {
   render() {
     return (
       <div>
+        <label>Description:</label>
+        <br></br>
+        <input placeholder="description" id="description" />
+        <br></br>
+        <label>Location:</label>
+        <br></br>
+        <input placeholder="location" id="location" />
+        <br></br>
+        <label>Category:</label>
+        <br></br>
+        <input placeholder="category" id="category" />
+        <br></br>
+        <label>Contact Information:</label>
+        <br></br>
+        <input placeholder="contactInformation" id="contactInformation" />
+        <br></br>
+        <label>Price:</label>
+        <br></br>
+        <input placeholder="price" id="price" />
+        <br></br>
+        <label>Insert Image:</label>
+        <br></br>
         <input
           placeholder="image"
           id="image"
@@ -58,13 +80,8 @@ class PostHome extends React.Component {
           accept="image/png, image/jpeg"
           onChange={this.getImage.bind(this)}
         />
-        <input placeholder="description" id="description" />
-        <input placeholder="location" id="location" />
-        <input placeholder="category" id="category" />
-        <input placeholder="contactInformation" id="contactInformation" />
-        <input placeholder="price" id="price" />
+        <br></br>
         <button
-          changeView={this.props.changeView}
           onClick={() => {
             this.postHomes(
               $("#description").val(),
