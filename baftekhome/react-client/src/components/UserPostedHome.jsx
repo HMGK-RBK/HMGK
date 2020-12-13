@@ -25,11 +25,11 @@ class UserPostedHome extends React.Component {
       });
   }
 
+
   deleteHome(id) {
-    console.log(id);
-    // var index = event.target.id;
     axios.delete(`/api/homes/${id}`).then(() => {
       this.getUserHomes();
+      this.props.fetchHomes();
     });
   }
 
@@ -56,39 +56,5 @@ class UserPostedHome extends React.Component {
     );
   }
 }
-
-// }else if(props.state.v === "update"){
-//   return (
-//     <div>
-//     <label>Image:</label>
-//     <br></br>
-//     <input placeholder="image" id="image" />
-//     <br></br>
-//     <labe>Description:</labe>
-//     <br></br>
-//     <input placeholder="description" id="description" />
-//     <br></br>
-//     <labe>Location:</labe>
-//     <br></br>
-//     <input placeholder="location" id="location" />
-//     <br></br>
-//     <labe>Categroy:</labe>
-//     <br></br>
-//     <input placeholder="category" id="category" />
-//     <br></br>
-//     <labe>Contact Information:</labe>
-//     <br></br>
-//     <input placeholder="contactInformation" id="contactInformation" />
-//     <br></br>
-//     <labe>Price:</labe>
-//     <br></br>
-//     <input placeholder="price" id="price" />
-//     <br></br>
-//     <button type="submit">Delete</button>
-//     <br></br>
-//     <button type="submit">Update</button>
-//     </div>
-//   )
-// }
 
 export default UserPostedHome;
