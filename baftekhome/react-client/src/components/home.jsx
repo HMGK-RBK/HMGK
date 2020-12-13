@@ -3,6 +3,8 @@ import HomeDetail from "./HomeDetails.jsx";
 import HomeList from "./homeList.jsx";
 import PostHome from "./PostHome.jsx";
 import axios from "axios";
+import LogIn from "./login.jsx";
+import SignUp from "./signUp.jsx";
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,7 +16,6 @@ class Home extends React.Component {
     };
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
-
 
     this.deleteHome = this.deleteHome.bind(this);
   }
@@ -63,11 +64,16 @@ class Home extends React.Component {
       return (
         <div>
           {this.state.homes.map((home, index) => (
-            <HomeList home={home} key={index} getImages={this.getAllHomeImgs} deleteHome={this.deleteHome}/>
+            <HomeList
+              home={home}
+              key={index}
+              getImages={this.getAllHomeImgs}
+              deleteHome={this.deleteHome}
+            />
           ))}
         </div>
       );
-      } else if (this.props.view === "homedetails") {
+    } else if (this.props.view === "homedetails") {
       return (
         <div>
           <HomeDetail images={this.state.images} home={this.state.home} />
@@ -77,6 +83,18 @@ class Home extends React.Component {
       return (
         <div>
           <PostHome />
+        </div>
+      );
+    } else if (this.props.view === "login") {
+      return (
+        <div>
+          <LogIn changeView={this.props.changeView} />
+        </div>
+      );
+    } else if (this.props.view === "signup") {
+      return (
+        <div>
+          <SignUp changeView={this.props.changeView} />
         </div>
       );
     }

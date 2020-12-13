@@ -4,12 +4,10 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const port = 3000;
-
 const Home = require("../database/homes.js");
-
 const Users = require("../database/users.js");
-
 const Image = require("../database/images.js");
 
 mongoose.set("useCreateIndex", true);
@@ -43,8 +41,23 @@ app.post("/api/newuser", (req, res) => {
       obj.password = hash;
       Users.create(obj);
     });
-  });
+  })
+  // const token = jwt.sign({id : req.body._id},config.secret)
+  // res.status(200).send({auth:true ,token: token});
 });
+
+// app.get('/me', function(req, res) {
+//   var token = req.headers['x-access-token'];
+//   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+//   jwt.verify(token, config.secret, function(err, decoded) {
+//     if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+//   Users.findById(decoded.id, function (err, user) {
+//   if (err) return res.status(500).send("There was a problem finding the user.");
+//   if (!user) return res.status(404).send("No user found.");
+//   res.status(200).send(user);
+// });
+//   });
+// });
 
 app.post("/api/users", (req, res) => {
   Users.find({ email: req.body.email }, function (err, docs) {
