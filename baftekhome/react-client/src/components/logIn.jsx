@@ -21,7 +21,10 @@ class LogIn extends React.Component {
       data: JSON.stringify(obj),
       contentType: "application/json"
     }).done((res) => {
-      console.log(res);
+      if (res) {
+        this.props.getUser(res);
+        this.props.changeView("home");
+      }
     });
   }
 
@@ -37,10 +40,9 @@ class LogIn extends React.Component {
         <input id="logPassword" type="password" placeholder="Pasword" />
         <br></br>
         <button
-          onClick={() =>{
-            this.checkUser($("#logEmail").val(), $("#logPassword").val())
-            }
-          }>
+          onClick={() => {
+            this.checkUser($("#logEmail").val(), $("#logPassword").val());
+          }}>
           Log In
         </button>
       </div>
