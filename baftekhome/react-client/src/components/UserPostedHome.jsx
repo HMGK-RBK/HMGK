@@ -7,6 +7,7 @@ class UserPostedHome extends React.Component {
       userHomes: []
     };
     this.getUserHomes = this.getUserHomes.bind(this);
+    this.deleteHome = this.deleteHome.bind(this);
   }
 
   componentDidMount() {
@@ -24,17 +25,12 @@ class UserPostedHome extends React.Component {
       });
   }
 
-  deleteHome(event) {
-    var index = event.target.id;
-    axios
-      .delete(`/api/homes/${this.state.homes[index]._id}`)
-      .then(({ data }) => {
-        this.state.homes.splice(index, 1);
-        let newHomes = this.state.homes;
-        this.setState({
-          homes: newHomes
-        });
-      });
+  deleteHome(id) {
+    console.log(id);
+    // var index = event.target.id;
+    axios.delete(`/api/homes/${id}`).then(() => {
+      this.getUserHomes();
+    });
   }
 
   render() {
@@ -49,7 +45,9 @@ class UserPostedHome extends React.Component {
             <h4>Price: {home.price}$</h4>
             <h4>Contact Information: {home.contactInformation}</h4>
             <br></br>
-            <button type="submit">Delete</button>
+            <button type="submit" onClick={() => this.deleteHome(home._id)}>
+              Delete
+            </button>
             <br></br>
             <button type="submit">Update</button>
           </div>
