@@ -9,6 +9,7 @@ class LogIn extends React.Component {
     };
   }
 
+
   checkUser(email, password) {
     var obj = {
       email: email,
