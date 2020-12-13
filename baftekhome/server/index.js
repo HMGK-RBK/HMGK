@@ -4,12 +4,10 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const port = 3000;
-
 const Home = require("../database/homes.js");
-
 const Users = require("../database/users.js");
-
 const Image = require("../database/images.js");
 
 mongoose.set("useCreateIndex", true);
@@ -47,6 +45,19 @@ app.post("/api/newuser", (req, res) => {
   });
 });
 
+// app.get('/me', function(req, res) {
+//   var token = req.headers['x-access-token'];
+//   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+//   jwt.verify(token, config.secret, function(err, decoded) {
+//     if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+//   Users.findById(decoded.id, function (err, user) {
+//   if (err) return res.status(500).send("There was a problem finding the user.");
+//   if (!user) return res.status(404).send("No user found.");
+//   res.status(200).send(user);
+// });
+//   });
+// });
+
 app.post("/api/users", (req, res) => {
   Users.find({ email: req.body.email }, function (err, docs) {
     if (err) {
@@ -57,7 +68,9 @@ app.post("/api/users", (req, res) => {
         console.log(err);
       }
       if (result) {
-        res.send(docs);
+        const token = jwt.sign({ id: req.body._id }, "dT8tO3hL1mA7tN1gL5r");
+        res.send({ docs: docs, token: token });
+        res.end();
       }
     });
   });
@@ -66,12 +79,14 @@ app.post("/api/users", (req, res) => {
 app.get("/api/images/:_id", (req, res) => {
   Image.find({ homeID: req.params._id }, (err, docs) => {
     res.send(docs);
+    res.end();
   });
 });
 
 app.get("/api/homes/:_id", (req, res) => {
   Home.find({ _id: req.params._id }, (err, docs) => {
     res.send(docs);
+    res.end();
   });
 });
 
@@ -89,6 +104,7 @@ app.post("/api/homes", (req, res) => {
   Home.create(req.body)
     .then((result) => {
       res.send(result);
+      res.end();
     })
     .catch((err) => {
       res.send(err);
@@ -98,8 +114,14 @@ app.post("/api/homes", (req, res) => {
 app.get("/api/userHomes/:firstName", (req, res) => {
   Home.find({ firstName: req.params.firstName }, function (err, docs) {
     res.send(docs);
-    
-    console.log(req.params)
+    res.end();
+  });
+});
+
+app.delete("/api/homes/:_id", (req, res)=>{
+  Home.deleteOne({_id:req.params._id },  (err, docs) => {
+    res.send(docs);
+    res.end();
   });
 });
 

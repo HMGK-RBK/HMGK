@@ -38,8 +38,9 @@ class PostHome extends React.Component {
           contactInformation: contactInformation,
           price: price
         };
-        axios.post("/api/homes", obj).then(function (response) {
-          console.log(response);
+        axios.post("/api/homes", obj).then(() => {
+          this.props.fetchHomes();
+          this.props.changeView("home")
         });
       });
   }
