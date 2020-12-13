@@ -95,9 +95,11 @@ app.post("/api/homes", (req, res) => {
     });
 });
 
-app.get("/api/userHomes/:userName", (req, res) => {
-  Home.find({ userName: req.params.userName }, function (err, docs) {
+app.get("/api/userHomes/:firstName", (req, res) => {
+  Home.find({ firstName: req.params.firstName }, function (err, docs) {
     res.send(docs);
+    
+    console.log(req.params)
   });
 });
 
