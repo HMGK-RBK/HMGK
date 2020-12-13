@@ -1,20 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import $ from "jquery";
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      identity_card: ""
+      data: []
     };
-
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(firstName, lastName, email, password, identity_card) {
@@ -30,6 +22,8 @@ class SignUp extends React.Component {
       url: "/api/newuser",
       data: JSON.stringify(obj),
       contentType: "application/json"
+    }).done(() => {
+      this.props.changeView("login");
     });
   }
 

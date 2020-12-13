@@ -1,27 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import $ from "jquery";
 
 class LogIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      email: "",
-      password: "",
+      data: []
     };
   }
 
-// checkUser(){
-//   $.ajax({
-//     method:'GET',
-//     url:`/api/users`
-//   }).done((data) => {
-//     console.log(data);
-//   })
-// }
 
-  checkUser(email,password) {
+  checkUser(email, password) {
     var obj = {
       email: email,
       password: password
@@ -31,10 +20,12 @@ class LogIn extends React.Component {
       url: `/api/users`,
       data: JSON.stringify(obj),
       contentType: "application/json"
-    }).done((res)=>{
-    console.log(res)
-    })
-   
+    }).done((res) => {
+      if (res) {
+        this.props.getUser(res);
+        this.props.changeView("home");
+      }
+    });
   }
 
   render() {
@@ -48,7 +39,10 @@ class LogIn extends React.Component {
         <br></br>
         <input id="logPassword" type="password" placeholder="Pasword" />
         <br></br>
-        <button onClick={() => this.checkUser($("#logEmail").val(), $('#logPassword').val())}>
+        <button
+          onClick={() => {
+            this.checkUser($("#logEmail").val(), $("#logPassword").val());
+          }}>
           Log In
         </button>
       </div>
