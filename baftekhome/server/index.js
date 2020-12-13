@@ -42,9 +42,7 @@ app.post("/api/newuser", (req, res) => {
       Users.create(obj);
       res.end();
     });
-  })
-  // const token = jwt.sign({id : req.body._id},config.secret)
-  // res.status(200).send({auth:true ,token: token});
+  });
 });
 
 // app.get('/me', function(req, res) {
@@ -70,7 +68,9 @@ app.post("/api/users", (req, res) => {
         console.log(err);
       }
       if (result) {
-        res.send(docs);
+        const token = jwt.sign({ id: req.body._id }, "dT8tO3hL1mA7tN1gL5r");
+        res.send({ docs: docs, token: token });
+        res.end();
       }
     });
   });
@@ -79,12 +79,14 @@ app.post("/api/users", (req, res) => {
 app.get("/api/images/:_id", (req, res) => {
   Image.find({ homeID: req.params._id }, (err, docs) => {
     res.send(docs);
+    res.end();
   });
 });
 
 app.get("/api/homes/:_id", (req, res) => {
   Home.find({ _id: req.params._id }, (err, docs) => {
     res.send(docs);
+    res.end();
   });
 });
 
@@ -102,6 +104,7 @@ app.post("/api/homes", (req, res) => {
   Home.create(req.body)
     .then((result) => {
       res.send(result);
+      res.end();
     })
     .catch((err) => {
       res.send(err);
@@ -111,8 +114,14 @@ app.post("/api/homes", (req, res) => {
 app.get("/api/userHomes/:firstName", (req, res) => {
   Home.find({ firstName: req.params.firstName }, function (err, docs) {
     res.send(docs);
-    
-    console.log(req.params)
+    res.end();
+  });
+});
+
+app.delete("/api/homes/:_id", (req, res)=>{
+  Home.deleteOne({_id:req.params._id },  (err, docs) => {
+    res.send(docs);
+    res.end();
   });
 });
 

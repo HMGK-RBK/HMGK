@@ -9,7 +9,6 @@ class LogIn extends React.Component {
     };
   }
 
-
   checkUser(email, password) {
     var obj = {
       email: email,
@@ -22,7 +21,7 @@ class LogIn extends React.Component {
       contentType: "application/json"
     }).done((res) => {
       if (res) {
-        this.props.getUser(res);
+        this.props.getUser(res.docs);
         this.props.changeView("home");
       }
     });
