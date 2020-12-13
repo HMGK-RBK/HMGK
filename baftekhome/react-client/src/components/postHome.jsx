@@ -6,61 +6,65 @@ class PostHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      image: ""
     };
   }
-  postHomes(userName, image, description, location, category, contactInformation, price) {
-    var obj = {
-      userName: userName,
-      image: image,
-      description: description,
-      location: location,
-      category: category,
-      contactInformation: contactInformation,
-      price: price,
-    };
 
-    axios.post("/api/homes", obj).then(function (response) {
-      console.log(response);
-    });
+  postHomes(description, location, category, contactInformation, price) {
+    let config = {
+      headers: {
+        Authorization: "Client-ID 884e577759efe90"
+      }
+    };
+    const fd = new FormData();
+    fd.append("image", this.state.image);
+    axios
+      .post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        fd,
+        config
+      )
+      .then((res) => {
+        var firstName = this.props.user[0].firstName;
+        var lastName = this.props.user[0].lastName;
+        var obj = {
+          firstName: firstName,
+          lastName: lastName,
+          image: res.data.data.link,
+          description: description,
+          location: location,
+          category: category,
+          contactInformation: contactInformation,
+          price: price
+        };
+        axios.post("/api/homes", obj).then(function (response) {
+          console.log(response);
+        });
+      });
   }
 
+  getImage(event) {
+    this.setState({ image: event.target.files[0] });
+  }
   render() {
     return (
       <div>
-        <labe>User Name:</labe>
-        <br></br>
-        <input placeholder="userName" id="userName" />
-        <br></br>
-        <label>Image:</label>
-        <br></br>
-        <input placeholder="image" id="image" />
-        <br></br>
-        <labe>Description:</labe>
-        <br></br>
+        <input
+          placeholder="image"
+          id="image"
+          type="file"
+          accept="image/png, image/jpeg"
+          onChange={this.getImage.bind(this)}
+        />
         <input placeholder="description" id="description" />
-        <br></br>
-        <labe>Location:</labe>
-        <br></br>
         <input placeholder="location" id="location" />
-        <br></br>
-        <labe>Categroy:</labe>
-        <br></br>
         <input placeholder="category" id="category" />
-        <br></br>
-        <labe>Contact Information:</labe>
-        <br></br>
         <input placeholder="contactInformation" id="contactInformation" />
-        <br></br>
-        <labe>Price:</labe>
-        <br></br>
         <input placeholder="price" id="price" />
-        <br></br>
         <button
           onClick={() => {
             this.postHomes(
-              $("#userName").val(),
-              $("#image").val(),
               $("#description").val(),
               $("#location").val(),
               $("#category").val(),

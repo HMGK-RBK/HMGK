@@ -5,7 +5,7 @@ import PostHome from "./PostHome.jsx";
 import axios from "axios";
 import LogIn from "./login.jsx";
 import SignUp from "./signUp.jsx";
-import UserPostedHome from "./UserPostedHome.jsx"
+import UserPostedHome from "./UserPostedHome.jsx";
 
 class Home extends React.Component {
   constructor(props) {
@@ -14,12 +14,9 @@ class Home extends React.Component {
       homes: [],
       images: [],
       home: [],
-      userHomes:[]
     };
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
-    this.getUserHomes = this.getUserHomes.bind(this);
-    // this.deleteHome = this.deleteHome.bind(this);
   }
 
   componentDidMount() {
@@ -48,26 +45,6 @@ class Home extends React.Component {
     });
   }
 
-  // deleteHome(event) {
-  //   var index = event.target.id;
-  //   axios
-  //     .delete(`/api/homes/${this.state.homes[index]._id}`)
-  //     .then(({ data }) => {
-  //       this.state.homes.splice(index, 1);
-  //       let newHomes = this.state.homes;
-  //       this.setState({
-  //         homes: newHomes
-  //       });
-  //     });
-  // }
-  getUserHomes(){
-    axios.get(`/api/homes/${userName}`).then(({ data }) => {
-      this.setState({
-        userHomes: data
-      });
-      this.props.changeView("myposts");
-    });
-  }
 
   render() {
     if (this.props.view === "home") {
@@ -92,13 +69,16 @@ class Home extends React.Component {
     } else if (this.props.view === "post") {
       return (
         <div>
-          <PostHome />
+          <PostHome user={this.props.user} />
         </div>
       );
     } else if (this.props.view === "login") {
       return (
         <div>
-          <LogIn changeView={this.props.changeView} />
+          <LogIn
+            changeView={this.props.changeView}
+            getUser={this.props.getUser}
+          />
         </div>
       );
     } else if (this.props.view === "signup") {
@@ -110,9 +90,9 @@ class Home extends React.Component {
     } else if (this.props.view === "myposts") {
       return (
         <div>
-          <UserPostedHome changeView={this.props.changeView} />
+          <UserPostedHome changeView={this.props.changeView} user={this.props.user} />
         </div>
-      )
+      );
     }
   }
 }
