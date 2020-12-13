@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./components/home.jsx";
 import Navbar from "./components/Navbar.jsx";
+import axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends React.Component {
     this.setState({ user: obj });
   }
 
+
   render() {
     return (
       <div>
@@ -28,12 +30,14 @@ class App extends React.Component {
           view={this.state.view}
           isLoggedIn={this.state.user}
           changeView={this.changeView}
+          
         />
         <Home
           view={this.state.view}
           changeView={this.changeView}
           getUser={this.getUser}
           user={this.state.user}
+        
         />
       </div>
     );

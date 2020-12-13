@@ -14,11 +14,9 @@ class Home extends React.Component {
       homes: [],
       images: [],
       home: [],
-      userHomes: []
     };
     this.fetchHomes = this.fetchHomes.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
-    this.getUserHomes = this.getUserHomes.bind(this);
   }
 
   componentDidMount() {
@@ -47,26 +45,6 @@ class Home extends React.Component {
     });
   }
 
-  // deleteHome(event) {
-  //   var index = event.target.id;
-  //   axios
-  //     .delete(`/api/homes/${this.state.homes[index]._id}`)
-  //     .then(({ data }) => {
-  //       this.state.homes.splice(index, 1);
-  //       let newHomes = this.state.homes;
-  //       this.setState({
-  //         homes: newHomes
-  //       });
-  //     });
-  // }
-  getUserHomes() {
-    axios.get(`/api/homes/${userName}`).then(({ data }) => {
-      this.setState({
-        userHomes: data
-      });
-      this.props.changeView("myposts");
-    });
-  }
 
   render() {
     if (this.props.view === "home") {
@@ -112,7 +90,7 @@ class Home extends React.Component {
     } else if (this.props.view === "myposts") {
       return (
         <div>
-          <UserPostedHome changeView={this.props.changeView} />
+          <UserPostedHome changeView={this.props.changeView} user={this.props.user} />
         </div>
       );
     }
