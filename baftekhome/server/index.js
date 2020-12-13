@@ -58,6 +58,7 @@ app.post("/api/users", (req, res) => {
       }
       if (result) {
         res.send(docs);
+        res.end();
       }
     });
   });
@@ -66,12 +67,14 @@ app.post("/api/users", (req, res) => {
 app.get("/api/images/:_id", (req, res) => {
   Image.find({ homeID: req.params._id }, (err, docs) => {
     res.send(docs);
+    res.end();
   });
 });
 
 app.get("/api/homes/:_id", (req, res) => {
   Home.find({ _id: req.params._id }, (err, docs) => {
     res.send(docs);
+    res.end();
   });
 });
 
@@ -89,6 +92,7 @@ app.post("/api/homes", (req, res) => {
   Home.create(req.body)
     .then((result) => {
       res.send(result);
+      res.end();
     })
     .catch((err) => {
       res.send(err);
@@ -98,8 +102,7 @@ app.post("/api/homes", (req, res) => {
 app.get("/api/userHomes/:firstName", (req, res) => {
   Home.find({ firstName: req.params.firstName }, function (err, docs) {
     res.send(docs);
-    
-    console.log(req.params)
+    res.end();
   });
 });
 
