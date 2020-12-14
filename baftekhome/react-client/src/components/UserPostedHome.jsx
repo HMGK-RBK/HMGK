@@ -38,18 +38,18 @@ class UserPostedHome extends React.Component {
       <div>
         {this.state.userHomes.map((home, index) => (
           <div key={index}>
-            <img src={home.image} />
+            <img  className='img' src={home.image} />
             <h2>Apartment for Sale at {home.location}</h2>
             <h2>Categroy: {home.category}</h2>
             <h4>Description: {home.description}</h4>
             <h4>Price: {home.price}$</h4>
             <h4>Contact Information: {home.contactInformation}</h4>
             <br></br>
-            <button type="submit" onClick={() => this.deleteHome(home._id)}>
+            <button  className='btn' type="submit" onClick={() => this.deleteHome(home._id)}>
               Delete
             </button>
             <br></br>
-            <button type="submit">Update</button>
+            <button className='btn'  type="submit">Update</button>
           </div>
         ))}
       </div>
