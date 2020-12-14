@@ -9,17 +9,17 @@ class Homelist extends React.Component {
   render() {
     return (
       <div>
-        <img
+        <img className='img'
           src={this.props.home.image}
           onClick={() => this.props.getImages(this.props.home._id)}
         />
-        <p>description: {this.props.home.description}</p>
+        <p className='title' >Description: {this.props.home.description}</p>
         <p onClick={() => this.props.getImages(this.props.home._id)}>
           {this.props.home.location}
         </p>
-        <p>category: {this.props.home.category}</p>
-        <p>price: {this.props.home.price} $</p>
-        <p>contact information: {this.props.home.contactInformation}</p>
+        <p className='title' >Category: {this.props.home.category}</p>
+        <p className='title'> Price: {this.props.home.price} $</p>
+        <p className='title' >Contact Information: {this.props.home.contactInformation}</p>
       </div>
     );
   }

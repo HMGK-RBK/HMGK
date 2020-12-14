@@ -18,11 +18,17 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^5.10.16",
+    "nodemon": "^2.0.6",
     "prop-types": "^15.7.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-instagram-zoom-slider": "^1.4.0",
+    "react-items-carousel": "^2.8.0",
+    "react-spring": "^8.0.27",
+    "react-use-gesture": "^8.0.1",
     "socket.io": "^3.0.3",
-    "socket.io-client": "^3.0.3"
+    "socket.io-client": "^3.0.3",
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "react-dev": "webpack -d --watch",

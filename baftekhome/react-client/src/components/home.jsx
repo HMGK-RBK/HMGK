@@ -44,7 +44,7 @@ class Home extends React.Component {
       });
     });
   }
-
+  
   render() {
     if (this.props.view === "home") {
       return (
@@ -65,6 +65,7 @@ class Home extends React.Component {
           <HomeDetail
             images={this.state.images}
             home={this.state.homeDetails}
+           
           />
         </div>
       );

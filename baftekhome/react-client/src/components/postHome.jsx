@@ -91,25 +91,18 @@ class PostHome extends React.Component {
     if (!this.state.isLoading) {
       return (
         <div>
-          <label>Description:</label>
+          <input className="input" placeholder="description" id="description" />
           <br></br>
-          <input placeholder="description" id="description" />
+          <input className="input" placeholder="location" id="location" />
           <br></br>
-          <label>Location:</label>
+          <input className="input" placeholder="category" id="category" />
           <br></br>
-          <input placeholder="location" id="location" />
-          <br></br>
-          <label>Category:</label>
-          <br></br>
-          <input placeholder="category" id="category" />
-          <br></br>
-          <label>Price:</label>
-          <br></br>
-          <input placeholder="price" id="price" />
-          <br></br>
-          <label>Insert Image:</label>
+          <input className="input" placeholder="price" id="price" />
           <br></br>
           <input
+            className="input"
+            placeholder="image"
+            id="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage1.bind(this)}
@@ -126,6 +119,7 @@ class PostHome extends React.Component {
           />
           <br></br>
           <button
+            className="btn"
             onClick={() => {
               this.postHomes(
                 $("#description").val(),
@@ -141,25 +135,18 @@ class PostHome extends React.Component {
     } else {
       return (
         <div>
-          <label>Description:</label>
+          <input className="input" placeholder="description" id="description" />
           <br></br>
-          <input placeholder="description" id="description" />
+          <input className="input" placeholder="location" id="location" />
           <br></br>
-          <label>Location:</label>
+          <input className="input" placeholder="category" id="category" />
           <br></br>
-          <input placeholder="location" id="location" />
-          <br></br>
-          <label>Category:</label>
-          <br></br>
-          <input placeholder="category" id="category" />
-          <br></br>
-          <label>Price:</label>
-          <br></br>
-          <input placeholder="price" id="price" />
-          <br></br>
-          <label>Insert Image:</label>
+          <input className="input" placeholder="price" id="price" />
           <br></br>
           <input
+            className="input"
+            placeholder="image"
+            id="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage1.bind(this)}
@@ -176,6 +163,7 @@ class PostHome extends React.Component {
           />
           <br></br>
           <button
+            className="btn"
             onClick={() => {
               this.postHomes(
                 $("#description").val(),
