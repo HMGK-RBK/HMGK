@@ -22,6 +22,7 @@ class LogIn extends React.Component {
     }).done((res) => {
       if (res) {
         this.props.getUser(res.docs);
+        window.localStorage.setItem("accessToken", res.token);
         this.props.changeView("home");
       }
     });

@@ -13,71 +13,64 @@ class PostHome extends React.Component {
     };
   }
 
-  postHomes(description, location, category, contactInformation, price) {
+  postHomes(description, location, category, price) {
     let config = {
       headers: {
         Authorization: "Client-ID 884e577759efe90"
       }
     };
-    const fd = new FormData();
-    fd.append("image", this.state.image1);
-    axios
-      .post(
+    const img1 = new FormData();
+    const img2 = new FormData();
+    const img3 = new FormData();
+    img1.append("image", this.state.image1);
+    img2.append("image", this.state.image2);
+    img3.append("image", this.state.image3);
+    Promise.all([
+      axios.post(
         `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
-        fd,
+        img1,
+        config
+      ),
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img2,
+        config
+      ),
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img3,
         config
       )
-      .then((res) => {
-        var image1 = res.data.data.link;
-        const fd = new FormData();
-        fd.append("image", this.state.image2);
+    ]).then((res) => {
+      var image1 = res[0].data.data.link;
+      var image2 = res[1].data.data.link;
+      var image3 = res[2].data.data.link;
+      var obj = {
+        firstName: this.props.user[0].firstName,
+        lastName: this.props.user[0].lastName,
+        image: image1,
+        description: description,
+        location: location,
+        category: category,
+        contactInformation: this.props.user[0].email,
+        price: price
+      };
+      axios.post("/api/homes", obj).then((res) => {
+        console.log(res);
         axios
-          .post(
-            `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
-            fd,
-            config
-          )
-          .then((res) => {
-            var image2 = res.data.data.link;
-            const fd = new FormData();
-            fd.append("image", this.state.image3);
-            axios
-              .post(
-                `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
-                fd,
-                config
-              )
-              .then((res) => {
-                var image3 = res.data.data.link;
-                var firstName = this.props.user[0].firstName;
-                var lastName = this.props.user[0].lastName;
-                var obj = {
-                  firstName: firstName,
-                  lastName: lastName,
-                  image: image1,
-                  description: description,
-                  location: location,
-                  category: category,
-                  contactInformation: contactInformation,
-                  price: price
-                };
-                axios.post("/api/homes", obj).then((res) => {
-                  axios
-                    .post("/api/images", {
-                      homeID: res.data._id,
-                      image1: image1,
-                      image2: image2,
-                      image3: image3
-                    })
-                    .then(() => {
-                      console.log("done");
-                      this.props.fetchHomes();
-                      this.props.changeView("home");
-                    });
-                });
-              });
+          .post("/api/images", {
+            homeID: res.data._id,
+            image1: image1,
+            image2: image2,
+            image3: image3
+          })
+          .then(() => {
+            console.log("done");
+            this.props.fetchHomes();
+            this.props.changeView("home");
           });
       });
+    });
   }
 
   getImage1(event) {
@@ -103,10 +96,6 @@ class PostHome extends React.Component {
         <label>Category:</label>
         <br></br>
         <input placeholder="category" id="category" />
-        <br></br>
-        <label>Contact Information:</label>
-        <br></br>
-        <input placeholder="contactInformation" id="contactInformation" />
         <br></br>
         <label>Price:</label>
         <br></br>
@@ -136,7 +125,6 @@ class PostHome extends React.Component {
               $("#description").val(),
               $("#location").val(),
               $("#category").val(),
-              $("#contactInformation").val(),
               $("#price").val()
             );
           }}>

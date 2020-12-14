@@ -68,11 +68,33 @@ app.post("/api/users", (req, res) => {
         console.log(err);
       }
       if (result) {
-        const token = jwt.sign({ id: req.body._id }, "dT8tO3hL1mA7tN1gL5r");
+        const token = jwt.sign(
+          { email: req.body.email, password: req.body.password },
+          "dT8tO3hL1mA7tN1gL5r"
+        );
         res.send({ docs: docs, token: token });
         res.end();
       }
     });
+  });
+});
+
+app.post("/checkToken", (req, res) => {
+  jwt.verify(req.body.token, "dT8tO3hL1mA7tN1gL5r", (err, user) => {
+    if (user) {
+      Users.find({ email: user.email }, function (err, docs) {
+        if (err) {
+          console.log(err);
+        }
+        bcrypt.compare(user.password, docs[0].password, function (err, result) {
+          if (err) {
+            console.log(err);
+          } else if (result) {
+            res.send(docs);
+          }
+        });
+      });
+    }
   });
 });
 
