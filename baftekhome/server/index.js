@@ -13,7 +13,7 @@ const Image = require("../database/images.js");
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
   "mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/BaftekHome?retryWrites=true&w=majority",
-  {
+  { 
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
@@ -42,9 +42,7 @@ app.post("/api/newuser", (req, res) => {
       Users.create(obj);
       res.end();
     });
-  })
-  // const token = jwt.sign({id : req.body._id},config.secret)
-  // res.status(200).send({auth:true ,token: token});
+  });
 });
 
 // app.get('/me', function(req, res) {
@@ -70,7 +68,9 @@ app.post("/api/users", (req, res) => {
         console.log(err);
       }
       if (result) {
-        res.send(docs);
+        const token = jwt.sign({ id: req.body._id }, "dT8tO3hL1mA7tN1gL5r");
+        res.send({ docs: docs, token: token });
+        res.end();
       }
     });
   });
@@ -79,12 +79,20 @@ app.post("/api/users", (req, res) => {
 app.get("/api/images/:_id", (req, res) => {
   Image.find({ homeID: req.params._id }, (err, docs) => {
     res.send(docs);
+    res.end();
   });
+});
+
+app.post("/api/images", (req, res) => {
+  Image.create(req.body);
+  res.end();
 });
 
 app.get("/api/homes/:_id", (req, res) => {
   Home.find({ _id: req.params._id }, (err, docs) => {
+    if (err) res.send(err);
     res.send(docs);
+    res.end();
   });
 });
 
@@ -102,6 +110,7 @@ app.post("/api/homes", (req, res) => {
   Home.create(req.body)
     .then((result) => {
       res.send(result);
+      res.end();
     })
     .catch((err) => {
       res.send(err);
@@ -111,8 +120,14 @@ app.post("/api/homes", (req, res) => {
 app.get("/api/userHomes/:firstName", (req, res) => {
   Home.find({ firstName: req.params.firstName }, function (err, docs) {
     res.send(docs);
-    
-    console.log(req.params)
+    res.end();
+  });
+});
+
+app.delete("/api/homes/:_id", (req, res) => {
+  Home.deleteOne({ _id: req.params._id }, (err, docs) => {
+    res.send(docs);
+    res.end();
   });
 });
 

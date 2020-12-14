@@ -9,7 +9,6 @@ class LogIn extends React.Component {
     };
   }
 
-
   checkUser(email, password) {
     var obj = {
       email: email,
@@ -22,7 +21,7 @@ class LogIn extends React.Component {
       contentType: "application/json"
     }).done((res) => {
       if (res) {
-        this.props.getUser(res);
+        this.props.getUser(res.docs);
         this.props.changeView("home");
       }
     });
@@ -31,15 +30,15 @@ class LogIn extends React.Component {
   render() {
     return (
       <div>
-        <labe>Email:</labe>
+        <labe className="label">Email:</labe>
         <br></br>
-        <input id="logEmail" type="email" placeholder="Email" />
+        <input className = 'input' id="logEmail" type="email" placeholder="Email" />
         <br></br>
-        <labe>Password:</labe>
+        <labe className="label" >Password:</labe>
         <br></br>
-        <input id="logPassword" type="password" placeholder="Pasword" />
+        <input  className = 'input' id="logPassword" type="password" placeholder="Pasword" />
         <br></br>
-        <button
+        <button  className='btn'
           onClick={() => {
             this.checkUser($("#logEmail").val(), $("#logPassword").val());
           }}>
