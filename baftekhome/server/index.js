@@ -13,7 +13,7 @@ const Image = require("../database/images.js");
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
   "mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/BaftekHome?retryWrites=true&w=majority",
-  {
+  { 
     useNewUrlParser: true,
     useUnifiedTopology: true
   }

@@ -30,27 +30,27 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <label>First Name:</label>
+        <label  className="label" >First Name:</label>
         <br></br>
-        <input id="firstName" placeholder="First Name" />
+        <input className = 'input' id="firstName" placeholder="First Name" />
         <br></br>
-        <labe>Last Name:</labe>
+        <labe  className="label" >Last Name:</labe>
         <br></br>
-        <input id="lastName" placeholder="Last Name" />
+        <input  className = 'input' id="lastName" placeholder="Last Name" />
         <br></br>
-        <labe>Email:</labe>
+        <labe  className="label" >Email:</labe>
         <br></br>
-        <input id="email" placeholder="Email" />
+        <input className = 'input' id="email" placeholder="Email" />
         <br></br>
-        <labe>Password:</labe>
+        <labe  className="label" >Password:</labe>
         <br></br>
-        <input id="password" placeholder="password" type="password" />
+        <input className = 'input' id="password" placeholder="password" type="password" />
         <br></br>
-        <labe>Identity Card:</labe>
+        <labe  className="label" >Identity Card:</labe>
         <br></br>
-        <input id="identity_card" placeholder="identity card" type="number" />
+        <input className = 'input' id="identity_card" placeholder="identity card" type="number" />
         <br></br>
-        <button
+        <button className='btn'
           type="submit"
           onClick={() =>
             this.handleClick(
