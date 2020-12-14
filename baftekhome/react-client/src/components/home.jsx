@@ -33,17 +33,61 @@ class Home extends React.Component {
     return axios.get("/api/homes");
   }
 
-  updateHome(id, location, category, desc, price) {
-    var obj = {
-      location: location,
-      category: category,
-      description: desc,
-      price: parseInt(price)
+  updateHome(id, location, category, desc, price, x, y, z) {
+    let config = {
+      headers: {
+        Authorization: "Client-ID 7349a849d56fa90"
+      }
     };
-    axios.put(`/updateHome/${id}`, obj).then((data) => {
-      axios.get("/api/homes").then((res) => {
-        this.fetchHomes();
-        this.setState({ homes: res });
+    const img1 = new FormData();
+    const img2 = new FormData();
+    const img3 = new FormData();
+    img1.append("image", x);
+    img2.append("image", y);
+    img3.append("image", z);
+    Promise.all([
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img1,
+        config
+      ),
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img2,
+        config
+      ),
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img3,
+        config
+      )
+    ]).then((res) => {
+      var image1 = res[0].data.data.link;
+      var image2 = res[1].data.data.link;
+      var image3 = res[2].data.data.link;
+      var obj = {
+        location: location,
+        category: category,
+        description: desc,
+        price: parseInt(price),
+        image: image1
+      };
+      var obj1 = {
+        image1: image1,
+        image2: image2,
+        image3: image3
+      };
+      Promise.all([
+        axios.put(`/updateHome/${id}`, obj),
+        axios.put(`/updateImg/${id}`, obj1)
+      ]).then(() => {
+        this.fetchHomes().then(({ data }) => {
+          this.props.getUserHomes();
+          this.setState({
+            homes: data
+          });
+          this.props.changeView("home");
+        });
       });
     });
   }
