@@ -16,18 +16,46 @@ class Home extends React.Component {
       homeDetails: []
     };
     this.fetchHomes = this.fetchHomes.bind(this);
+    this.updateHome = this.updateHome.bind(this);
+    this.deleteHome = this.deleteHome.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
   }
 
   componentDidMount() {
-    this.fetchHomes();
-  }
-
-  fetchHomes() {
-    axios.get("/api/homes").then(({ data }) => {
+    this.fetchHomes().then(({ data }) => {
       this.setState({
         homes: data
       });
+    });
+  }
+
+  fetchHomes() {
+    return axios.get("/api/homes");
+  }
+
+  updateHome(id, location, category, desc, price) {
+    var obj = {
+      location: location,
+      category: category,
+      description: desc,
+      price: parseInt(price)
+    };
+    axios.put(`/updateHome/${id}`, obj).then((data) => {
+      axios.get("/api/homes").then((res) => {
+        this.fetchHomes();
+        this.setState({ homes: res });
+      });
+    });
+  }
+
+  deleteHome(id) {
+    axios.delete(`/api/homes/${id}`).then((res) => {
+      this.fetchHomes().then(({ data }) => {
+        this.setState({
+          homes: data
+        });
+      });
+      this.props.getUserHomes();
     });
   }
 
@@ -44,7 +72,7 @@ class Home extends React.Component {
       });
     });
   }
-  
+
   render() {
     if (this.props.view === "home") {
       return (
@@ -65,7 +93,6 @@ class Home extends React.Component {
           <HomeDetail
             images={this.state.images}
             home={this.state.homeDetails}
-           
           />
         </div>
       );
@@ -86,6 +113,7 @@ class Home extends React.Component {
           <LogIn
             changeView={this.props.changeView}
             getUser={this.props.getUser}
+            getUserHomes={this.props.getUserHomes}
           />
         </div>
       );
@@ -98,11 +126,15 @@ class Home extends React.Component {
     } else if (this.props.view === "myposts") {
       return (
         <div>
-          <UserPostedHome
-            changeView={this.props.changeView}
-            user={this.props.user}
-            fetchHomes={this.fetchHomes}
-          />
+          {this.props.userHomes.map((home, index) => (
+            <UserPostedHome
+              changeView={this.props.changeView}
+              home={home}
+              key={index}
+              updateHome={this.updateHome}
+              deleteHome={this.deleteHome}
+            />
+          ))}
         </div>
       );
     }

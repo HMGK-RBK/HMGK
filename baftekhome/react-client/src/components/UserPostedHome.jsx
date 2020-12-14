@@ -1,59 +1,53 @@
 import React from "react";
 import axios from "axios";
+import UpdateForm from "./updateForm.jsx";
+
 class UserPostedHome extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userHomes: []
+      homeId: "",
+      edit: false
     };
-    this.getUserHomes = this.getUserHomes.bind(this);
-    this.deleteHome = this.deleteHome.bind(this);
-  }
-
-  componentDidMount() {
-    this.getUserHomes();
-  }
-
-  getUserHomes() {
-    axios
-      .get(`/api/userHomes/${this.props.user[0].firstName}`)
-      .then(({ data }) => {
-        this.setState({
-          userHomes: data
-        });
-        this.props.changeView("myposts");
-      });
-  }
-
-
-  deleteHome(id) {
-    axios.delete(`/api/homes/${id}`).then(() => {
-      this.getUserHomes();
-      this.props.fetchHomes();
-    });
   }
 
   render() {
-    return (
-      <div>
-        {this.state.userHomes.map((home, index) => (
-          <div key={index}>
-            <img  className='img' src={home.image} />
-            <h2>Apartment for Sale at {home.location}</h2>
-            <h2>Categroy: {home.category}</h2>
-            <h4>Description: {home.description}</h4>
-            <h4>Price: {home.price}$</h4>
-            <h4>Contact Information: {home.contactInformation}</h4>
-            <br></br>
-            <button  className='btn' type="submit" onClick={() => this.deleteHome(home._id)}>
-              Delete
-            </button>
-            <br></br>
-            <button className='btn'  type="submit">Update</button>
-          </div>
-        ))}
-      </div>
-    );
+    if (!this.state.edit) {
+      return (
+        <div>
+          <img src={this.props.home.image} />
+          <h2>Apartment for Sale at {this.props.home.location}</h2>
+          <h2>Categroy: {this.props.home.category}</h2>
+          <h4>Description: {this.props.home.description}</h4>
+          <h4>Price: {this.props.home.price}$</h4>
+          <h4>Contact Information: {this.props.home.contactInformation}</h4>
+          <br></br>
+          <button
+            type="submit"
+            onClick={() => this.props.deleteHome(this.props.home._id)}>
+            Delete
+          </button>
+          <br></br>
+          <button
+            type="submit"
+            onClick={() =>
+              this.setState({ edit: true, homeId: this.props.home._id })
+            }>
+            Update
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <UpdateForm
+            homeId={this.state.homeId}
+            updateHome={this.props.updateHome}
+            changeView={this.props.changeView}
+          />
+        </div>
+      );
+    }
   }
 }
 
