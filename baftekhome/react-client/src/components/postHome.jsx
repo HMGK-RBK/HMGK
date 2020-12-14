@@ -9,11 +9,16 @@ class PostHome extends React.Component {
       data: [],
       image1: "",
       image2: "",
-      image3: ""
+      image3: "",
+      isLoading: false
     };
   }
 
   postHomes(description, location, category, price) {
+    if (!description || !location || !category || !price) {
+      return alert("Please fill all the information");
+    }
+    this.setState({ isLoading: true });
     let config = {
       headers: {
         Authorization: "Client-ID 884e577759efe90"
@@ -65,8 +70,8 @@ class PostHome extends React.Component {
             image3: image3
           })
           .then(() => {
-            console.log("done");
             this.props.fetchHomes();
+            this.setState({ isLoading: false });
             this.props.changeView("home");
           });
       });
@@ -83,55 +88,108 @@ class PostHome extends React.Component {
     this.setState({ image3: event.target.files[0] });
   }
   render() {
-    return (
-      <div>
-        <label>Description:</label>
-        <br></br>
-        <input placeholder="description" id="description" />
-        <br></br>
-        <label>Location:</label>
-        <br></br>
-        <input placeholder="location" id="location" />
-        <br></br>
-        <label>Category:</label>
-        <br></br>
-        <input placeholder="category" id="category" />
-        <br></br>
-        <label>Price:</label>
-        <br></br>
-        <input placeholder="price" id="price" />
-        <br></br>
-        <label>Insert Image:</label>
-        <br></br>
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={this.getImage1.bind(this)}
-        />
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={this.getImage2.bind(this)}
-        />
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          onChange={this.getImage3.bind(this)}
-        />
-        <br></br>
-        <button
-          onClick={() => {
-            this.postHomes(
-              $("#description").val(),
-              $("#location").val(),
-              $("#category").val(),
-              $("#price").val()
-            );
-          }}>
-          submit
-        </button>
-      </div>
-    );
+    if (!this.state.isLoading) {
+      return (
+        <div>
+          <label>Description:</label>
+          <br></br>
+          <input placeholder="description" id="description" />
+          <br></br>
+          <label>Location:</label>
+          <br></br>
+          <input placeholder="location" id="location" />
+          <br></br>
+          <label>Category:</label>
+          <br></br>
+          <input placeholder="category" id="category" />
+          <br></br>
+          <label>Price:</label>
+          <br></br>
+          <input placeholder="price" id="price" />
+          <br></br>
+          <label>Insert Image:</label>
+          <br></br>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={this.getImage1.bind(this)}
+          />
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={this.getImage2.bind(this)}
+          />
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={this.getImage3.bind(this)}
+          />
+          <br></br>
+          <button
+            onClick={() => {
+              this.postHomes(
+                $("#description").val(),
+                $("#location").val(),
+                $("#category").val(),
+                $("#price").val()
+              );
+            }}>
+            submit
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <label>Description:</label>
+          <br></br>
+          <input placeholder="description" id="description" />
+          <br></br>
+          <label>Location:</label>
+          <br></br>
+          <input placeholder="location" id="location" />
+          <br></br>
+          <label>Category:</label>
+          <br></br>
+          <input placeholder="category" id="category" />
+          <br></br>
+          <label>Price:</label>
+          <br></br>
+          <input placeholder="price" id="price" />
+          <br></br>
+          <label>Insert Image:</label>
+          <br></br>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={this.getImage1.bind(this)}
+          />
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={this.getImage2.bind(this)}
+          />
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={this.getImage3.bind(this)}
+          />
+          <br></br>
+          <button
+            onClick={() => {
+              this.postHomes(
+                $("#description").val(),
+                $("#location").val(),
+                $("#category").val(),
+                $("#price").val()
+              );
+            }}>
+            submit
+          </button>
+          <img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+        </div>
+      );
+    }
   }
 }
 export default PostHome;
