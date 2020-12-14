@@ -43,7 +43,6 @@ class UserPostedHome extends React.Component {
           <UpdateForm
             homeId={this.state.homeId}
             updateHome={this.props.updateHome}
-            changeView={this.props.changeView}
           />
         </div>
       );

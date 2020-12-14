@@ -92,6 +92,13 @@ app.put("/updateHome/:id", (req, res) => {
   });
 });
 
+app.put("/updateImg/:id", (req, res) => {
+  Image.findOneAndUpdate({ homeID: req.params.id }, req.body, (err, docs) => {
+    if (err) console.log(err);
+    res.send(docs);
+  });
+});
+
 app.get("/api/images/:_id", (req, res) => {
   Image.find({ homeID: req.params._id }, (err, docs) => {
     res.send(docs);
