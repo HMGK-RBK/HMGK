@@ -21,7 +21,7 @@ class PostHome extends React.Component {
     this.setState({ isLoading: true });
     let config = {
       headers: {
-        Authorization: "Client-ID 884e577759efe90"
+        Authorization: "Client-ID 7349a849d56fa90"
       }
     };
     const img1 = new FormData();
