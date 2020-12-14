@@ -39,7 +39,10 @@ const Navbar = (props) => {
           <h2
             id="seeAllBtn"
             className="userNav"
-            onClick={() => props.changeView("myposts")}>
+            onClick={() => {
+              props.changeView("myposts");
+              props.getUserHomes();
+            }}>
             See my posted homes
           </h2>
           <h2 className="userNav" onClick={() => props.logOut()}>
