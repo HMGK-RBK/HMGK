@@ -83,8 +83,14 @@ app.get("/api/images/:_id", (req, res) => {
   });
 });
 
+app.post("/api/images", (req, res) => {
+  Image.create(req.body);
+  res.end();
+});
+
 app.get("/api/homes/:_id", (req, res) => {
   Home.find({ _id: req.params._id }, (err, docs) => {
+    if (err) res.send(err);
     res.send(docs);
     res.end();
   });
@@ -118,8 +124,8 @@ app.get("/api/userHomes/:firstName", (req, res) => {
   });
 });
 
-app.delete("/api/homes/:_id", (req, res)=>{
-  Home.deleteOne({_id:req.params._id },  (err, docs) => {
+app.delete("/api/homes/:_id", (req, res) => {
+  Home.deleteOne({ _id: req.params._id }, (err, docs) => {
     res.send(docs);
     res.end();
   });
