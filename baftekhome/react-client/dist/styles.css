@@ -1,11 +1,55 @@
 body {
   margin: 0px;
   color: rgb(0, 0, 0);
-  background-color: rgb(226, 226, 226);
+  background-color: rgb(255, 255, 255);
+} 
+
+
+.btn{
+  background-color:rgba(189, 163, 19, 0.795); /* Green */
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.label{
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 150%; 
+  
+}
+
+.input{
+  width: 25%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.img{
+  
+  width:50%; 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .navContainer {
-  background-color: rgba(51, 124, 148, 0.623);
+  background-color: rgba(189, 163, 19, 0.795);
   display: flex;
   height: 70px;
 }
@@ -54,4 +98,7 @@ body {
 
 #homeBtn:hover {
   color: white;
+}
+.title{
+  font-family: "Lucida Console", "Courier New", monospace;
 }
