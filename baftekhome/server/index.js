@@ -45,6 +45,7 @@ app.post("/api/newuser", (req, res) => {
   });
 });
 
+
 app.post("/api/users", (req, res) => {
   Users.find({ email: req.body.email }, function (err, docs) {
     if (err) {

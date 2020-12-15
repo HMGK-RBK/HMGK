@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./components/home.jsx";
 import Navbar from "./components/Navbar.jsx";
+import Logo from "./components/Logo.jsx"
 
 class App extends React.Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class App extends React.Component {
   }
 
   render() {
-    return (
+return (
       <div>
         <Navbar
           view={this.state.view}
@@ -77,6 +78,7 @@ class App extends React.Component {
       </div>
     );
   }
+
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));

@@ -4,7 +4,6 @@ body {
   background-color: rgb(255, 255, 255);
 } 
 
-
 .btn{
   background-color:rgba(189, 163, 19, 0.795); /* Green */
   border: none;
@@ -21,6 +20,16 @@ body {
   margin-left: auto;
   margin-right: auto
 }
+.gif{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.image{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .label{
   text-align: center;
@@ -28,7 +37,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   font-size: 150%; 
-  
+  cursor: pointer;
 }
 
 .input{
@@ -41,7 +50,6 @@ body {
   margin-right: auto;
 }
 .img{
-  
   width:50%; 
   display: block;
   margin-left: auto;
@@ -70,10 +78,21 @@ body {
 }
 
 .userNav {
-  margin: 2%;
+  margin-top: 10%;
+  margin: 0%;
   cursor: pointer;
+  padding: 6px;
+  float: left ;
+  width: 76px;
 }
-
+.containerr{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  border: 3px solid #030500;
+  padding: 10px;
+}
 .userNava:hover {
   color: white;
 }
@@ -98,7 +117,4 @@ body {
 
 #homeBtn:hover {
   color: white;
-}
-.title{
-  font-family: "Lucida Console", "Courier New", monospace;
 }

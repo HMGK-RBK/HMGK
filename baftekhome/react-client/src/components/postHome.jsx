@@ -100,19 +100,20 @@ class PostHome extends React.Component {
           <input className="input" placeholder="price" id="price" />
           <br></br>
           <input
-            className="input"
-            placeholder="image"
+          className="image"
             id="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage1.bind(this)}
           />
           <input
+          className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage2.bind(this)}
           />
           <input
+          className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage3.bind(this)}
@@ -144,19 +145,19 @@ class PostHome extends React.Component {
           <input className="input" placeholder="price" id="price" />
           <br></br>
           <input
-            className="input"
-            placeholder="image"
-            id="image"
+            className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage1.bind(this)}
           />
           <input
+           className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage2.bind(this)}
           />
           <input
+           className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage3.bind(this)}
@@ -174,7 +175,7 @@ class PostHome extends React.Component {
             }}>
             submit
           </button>
-          <img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+          <img className="gif" src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
         </div>
       );
     }
