@@ -16,6 +16,7 @@ class App extends React.Component {
     this.changeView = this.changeView.bind(this);
     this.logOut = this.logOut.bind(this);
     this.getUserHomes = this.getUserHomes.bind(this);
+    this.pushUsreHomes = this.pushUsreHomes.bind(this);
   }
   changeView(view) {
     this.setState({ view: view });
@@ -31,6 +32,11 @@ class App extends React.Component {
           userHomes: data
         });
       });
+  }
+  pushUsreHomes(home) {
+    var arr = this.state.userHomes;
+    arr.push(home.data);
+    this.setState({ userHomes: arr });
   }
 
   componentDidMount() {
@@ -73,6 +79,7 @@ class App extends React.Component {
           user={this.state.user}
           userHomes={this.state.userHomes}
           getUserHomes={this.getUserHomes}
+          pushUsreHomes={this.pushUsreHomes}
         />
       </div>
     );

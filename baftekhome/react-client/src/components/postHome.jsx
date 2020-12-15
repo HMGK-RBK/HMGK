@@ -21,7 +21,7 @@ class PostHome extends React.Component {
     this.setState({ isLoading: true });
     let config = {
       headers: {
-        Authorization: "Client-ID 7349a849d56fa90"
+        Authorization: "Client-ID 5e5547b0e67445e"
       }
     };
     const img1 = new FormData();
@@ -62,6 +62,7 @@ class PostHome extends React.Component {
       };
       axios.post("/api/homes", obj).then((res) => {
         this.props.getHomes(res);
+        this.props.pushUsreHomes(res);
         axios
           .post("/api/images", {
             homeID: res.data._id,
