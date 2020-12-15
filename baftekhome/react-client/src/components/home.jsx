@@ -46,6 +46,7 @@ class Home extends React.Component {
   }
   
   render() {
+    
     if (this.props.view === "home") {
       return (
         <div>

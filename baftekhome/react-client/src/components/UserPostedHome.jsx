@@ -35,15 +35,20 @@ class UserPostedHome extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className = 'containerr' >
         {this.state.userHomes.map((home, index) => (
           <div key={index}>
             <img  className='img' src={home.image} />
-            <h2>Apartment for Sale at {home.location}</h2>
-            <h2>Categroy: {home.category}</h2>
-            <h4>Description: {home.description}</h4>
-            <h4>Price: {home.price}$</h4>
-            <h4>Contact Information: {home.contactInformation}</h4>
+            <h2>Apartment for Sale at :</h2>
+            <h4>{home.location}</h4>
+            <h2>Categroy: </h2>
+            <h4>{home.category}</h4>
+            <h2>Description:</h2>
+            <h4> {home.description}</h4>
+            <h2>Price:</h2>
+            <h4> {home.price}$</h4>
+            <h2>Contact Information: </h2>
+            <h4>{home.contactInformation}</h4>
             <br></br>
             <button  className='btn' type="submit" onClick={() => this.deleteHome(home._id)}>
               Delete
