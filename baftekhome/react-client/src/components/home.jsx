@@ -16,18 +16,90 @@ class Home extends React.Component {
       homeDetails: []
     };
     this.fetchHomes = this.fetchHomes.bind(this);
+    this.updateHome = this.updateHome.bind(this);
+    this.deleteHome = this.deleteHome.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
   }
 
   componentDidMount() {
-    this.fetchHomes();
-  }
-
-  fetchHomes() {
-    axios.get("/api/homes").then(({ data }) => {
+    this.fetchHomes().then(({ data }) => {
       this.setState({
         homes: data
       });
+    });
+  }
+
+  fetchHomes() {
+    return axios.get("/api/homes");
+  }
+
+  updateHome(id, location, category, desc, price, x, y, z) {
+    let config = {
+      headers: {
+        Authorization: "Client-ID 7349a849d56fa90"
+      }
+    };
+    const img1 = new FormData();
+    const img2 = new FormData();
+    const img3 = new FormData();
+    img1.append("image", x);
+    img2.append("image", y);
+    img3.append("image", z);
+    Promise.all([
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img1,
+        config
+      ),
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img2,
+        config
+      ),
+      axios.post(
+        `https://cors-anywhere.herokuapp.com/https://api.imgur.com/3/upload`,
+        img3,
+        config
+      )
+    ]).then((res) => {
+      var image1 = res[0].data.data.link;
+      var image2 = res[1].data.data.link;
+      var image3 = res[2].data.data.link;
+      var obj = {
+        location: location,
+        category: category,
+        description: desc,
+        price: parseInt(price),
+        image: image1
+      };
+      var obj1 = {
+        image1: image1,
+        image2: image2,
+        image3: image3
+      };
+      Promise.all([
+        axios.put(`/updateHome/${id}`, obj),
+        axios.put(`/updateImg/${id}`, obj1)
+      ]).then(() => {
+        this.fetchHomes().then(({ data }) => {
+          this.props.getUserHomes();
+          this.setState({
+            homes: data
+          });
+          this.props.changeView("home");
+        });
+      });
+    });
+  }
+
+  deleteHome(id) {
+    axios.delete(`/api/homes/${id}`).then((res) => {
+      this.fetchHomes().then(({ data }) => {
+        this.setState({
+          homes: data
+        });
+      });
+      this.props.getUserHomes();
     });
   }
 
@@ -44,8 +116,9 @@ class Home extends React.Component {
       });
     });
   }
-  
+
   render() {
+    
     if (this.props.view === "home") {
       return (
         <div>
@@ -65,7 +138,6 @@ class Home extends React.Component {
           <HomeDetail
             images={this.state.images}
             home={this.state.homeDetails}
-           
           />
         </div>
       );
@@ -86,6 +158,7 @@ class Home extends React.Component {
           <LogIn
             changeView={this.props.changeView}
             getUser={this.props.getUser}
+            getUserHomes={this.props.getUserHomes}
           />
         </div>
       );
@@ -98,11 +171,15 @@ class Home extends React.Component {
     } else if (this.props.view === "myposts") {
       return (
         <div>
-          <UserPostedHome
-            changeView={this.props.changeView}
-            user={this.props.user}
-            fetchHomes={this.fetchHomes}
-          />
+          {this.props.userHomes.map((home, index) => (
+            <UserPostedHome
+              changeView={this.props.changeView}
+              home={home}
+              key={index}
+              updateHome={this.updateHome}
+              deleteHome={this.deleteHome}
+            />
+          ))}
         </div>
       );
     }

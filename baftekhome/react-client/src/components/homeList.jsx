@@ -8,18 +8,24 @@ class Homelist extends React.Component {
 
   render() {
     return (
-      <div>
+
+      <div className = 'containerr'>
         <img className='img'
           src={this.props.home.image}
           onClick={() => this.props.getImages(this.props.home._id)}
         />
-        <p className='title' >Description: {this.props.home.description}</p>
-        <p onClick={() => this.props.getImages(this.props.home._id)}>
-          {this.props.home.location}
-        </p>
-        <p className='title' >Category: {this.props.home.category}</p>
-        <p className='title'> Price: {this.props.home.price} $</p>
-        <p className='title' >Contact Information: {this.props.home.contactInformation}</p>
+        <h2 >Description: </h2>
+        <h4>{this.props.home.description}</h4>
+        <h2 onClick={() => this.props.getImages(this.props.home._id)}>
+        </h2>
+        <h4> {this.props.home.location}</h4>
+        <h2 >Category: </h2>
+        <h4>{this.props.home.category}</h4>
+        <h2 > Price:  </h2>
+        <h4>{this.props.home.price} $ </h4>
+        <h2  >Contact Information: </h2>
+        <h4>{this.props.home.contactInformation}</h4>
+
       </div>
     );
   }

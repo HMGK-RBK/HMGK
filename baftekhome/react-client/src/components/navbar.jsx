@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const Navbar = (props) => {
   if (!props.isLoggedIn) {
     return (
@@ -40,10 +39,16 @@ const Navbar = (props) => {
           <h2
             id="seeAllBtn"
             className="userNav"
-            onClick={() => 
-              props.changeView("myposts")
-              }>           
-            See my posted homes
+
+            onClick={() => {
+              props.changeView("myposts");
+              props.getUserHomes();
+            }}>
+          ²²²Posted homes
+
+          </h2>
+          <h2 className="userNav" onClick={() => props.logOut()}>
+            log Out
           </h2>
         </div>
       </div>

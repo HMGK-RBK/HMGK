@@ -22,6 +22,7 @@ class LogIn extends React.Component {
     }).done((res) => {
       if (res) {
         this.props.getUser(res.docs);
+        window.localStorage.setItem("accessToken", res.token);
         this.props.changeView("home");
       }
     });
@@ -32,13 +33,24 @@ class LogIn extends React.Component {
       <div>
         <labe className="label">Email:</labe>
         <br></br>
-        <input className = 'input' id="logEmail" type="email" placeholder="Email" />
+        <input
+          className="input"
+          id="logEmail"
+          type="email"
+          placeholder="Email"
+        />
         <br></br>
-        <labe className="label" >Password:</labe>
+        <labe className="label">Password:</labe>
         <br></br>
-        <input  className = 'input' id="logPassword" type="password" placeholder="Pasword" />
+        <input
+          className="input"
+          id="logPassword"
+          type="password"
+          placeholder="Pasword"
+        />
         <br></br>
-        <button  className='btn'
+        <button
+          className="btn"
           onClick={() => {
             this.checkUser($("#logEmail").val(), $("#logPassword").val());
           }}>
