@@ -26,7 +26,7 @@ const Navbar = (props) => {
   } else {
     return (
       <div className="navContainer">
-        <h1 id="homeBtn" onClick={() => props.changeView("home")}>
+        <h1 id="homeBtn" onClick={() => props.changeView("list")}>
           Baftek Home
         </h1>
         <div className="navPosts">
@@ -39,13 +39,11 @@ const Navbar = (props) => {
           <h2
             id="seeAllBtn"
             className="userNav"
-
             onClick={() => {
               props.changeView("myposts");
               props.getUserHomes();
             }}>
-          ²²²Posted homes
-
+            Posted homes
           </h2>
           <h2 className="userNav" onClick={() => props.logOut()}>
             log Out

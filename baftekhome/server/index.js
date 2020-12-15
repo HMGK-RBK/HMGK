@@ -5,7 +5,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const port = 3000;
+const port = 5000;
 const Home = require("../database/homes.js");
 const Users = require("../database/users.js");
 const Image = require("../database/images.js");
@@ -44,7 +44,6 @@ app.post("/api/newuser", (req, res) => {
     });
   });
 });
-
 
 app.post("/api/users", (req, res) => {
   Users.find({ email: req.body.email }, function (err, docs) {

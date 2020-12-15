@@ -3,7 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Home from "./components/home.jsx";
 import Navbar from "./components/Navbar.jsx";
-import Logo from "./components/Logo.jsx"
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +16,7 @@ class App extends React.Component {
     this.changeView = this.changeView.bind(this);
     this.logOut = this.logOut.bind(this);
     this.getUserHomes = this.getUserHomes.bind(this);
+    this.pushUsreHomes = this.pushUsreHomes.bind(this);
   }
   changeView(view) {
     this.setState({ view: view });
@@ -33,8 +33,13 @@ class App extends React.Component {
         });
       });
   }
+  pushUsreHomes(home) {
+    var arr = this.state.userHomes;
+    arr.push(home.data);
+    this.setState({ userHomes: arr });
+  }
 
-  componentWillMount() {
+  componentDidMount() {
     var token = window.localStorage.getItem("accessToken");
     if (token) {
       axios
@@ -43,7 +48,6 @@ class App extends React.Component {
           this.setState({ user: data.data });
         })
         .then(() => {
-          console.log(this.state.user);
           this.getUserHomes();
         })
         .catch((err) => {
@@ -54,11 +58,12 @@ class App extends React.Component {
 
   logOut() {
     this.setState({ user: undefined });
+    this.setState({ view: "home" });
     window.localStorage.setItem("accessToken", undefined);
   }
 
   render() {
-return (
+    return (
       <div>
         <Navbar
           view={this.state.view}
@@ -74,11 +79,11 @@ return (
           user={this.state.user}
           userHomes={this.state.userHomes}
           getUserHomes={this.getUserHomes}
+          pushUsreHomes={this.pushUsreHomes}
         />
       </div>
     );
   }
-
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));
