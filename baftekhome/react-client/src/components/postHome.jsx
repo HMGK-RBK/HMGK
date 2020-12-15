@@ -21,7 +21,7 @@ class PostHome extends React.Component {
     this.setState({ isLoading: true });
     let config = {
       headers: {
-        Authorization: "Client-ID 7349a849d56fa90"
+        Authorization: "Client-ID 5e5547b0e67445e"
       }
     };
     const img1 = new FormData();
@@ -61,7 +61,8 @@ class PostHome extends React.Component {
         price: price
       };
       axios.post("/api/homes", obj).then((res) => {
-        console.log(res);
+        this.props.getHomes(res);
+        this.props.pushUsreHomes(res);
         axios
           .post("/api/images", {
             homeID: res.data._id,
@@ -70,9 +71,8 @@ class PostHome extends React.Component {
             image3: image3
           })
           .then(() => {
-            this.props.fetchHomes();
             this.setState({ isLoading: false });
-            this.props.changeView("home");
+            this.props.changeView("list");
           });
       });
     });
@@ -100,19 +100,20 @@ class PostHome extends React.Component {
           <input className="input" placeholder="price" id="price" />
           <br></br>
           <input
-            className="input"
-            placeholder="image"
+            className="image"
             id="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage1.bind(this)}
           />
           <input
+            className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage2.bind(this)}
           />
           <input
+            className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage3.bind(this)}
@@ -144,19 +145,19 @@ class PostHome extends React.Component {
           <input className="input" placeholder="price" id="price" />
           <br></br>
           <input
-            className="input"
-            placeholder="image"
-            id="image"
+            className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage1.bind(this)}
           />
           <input
+            className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage2.bind(this)}
           />
           <input
+            className="image"
             type="file"
             accept="image/png, image/jpeg"
             onChange={this.getImage3.bind(this)}
@@ -174,7 +175,10 @@ class PostHome extends React.Component {
             }}>
             submit
           </button>
-          <img src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+          <img
+            className="gif"
+            src="https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
+          />
         </div>
       );
     }

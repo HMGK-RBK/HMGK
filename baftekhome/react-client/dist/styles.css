@@ -2,11 +2,10 @@ body {
   margin: 0px;
   color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
-} 
+}
 
-
-.btn{
-  background-color:rgba(189, 163, 19, 0.795); /* Green */
+.btn {
+  background-color: rgba(189, 163, 19, 0.795); /* Green */
   border: none;
   color: white;
   padding: 10px 25px;
@@ -19,19 +18,29 @@ body {
   cursor: pointer;
   display: block;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+}
+.gif {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.label{
+.label {
   text-align: center;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  font-size: 150%; 
-  
+  font-size: 150%;
+  cursor: pointer;
 }
 
-.input{
+.input {
   width: 25%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -40,12 +49,15 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-.img{
-  
-  width:50%; 
+.img {
+  width: 50%;
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+#logo {
+  height: 800px;
 }
 
 .navContainer {
@@ -65,15 +77,30 @@ body {
   display: flex;
   position: relative;
   left: 65%;
-  margin-top: 1%;
+  margin-top: 1.3px;
   width: 30%;
 }
 
 .userNav {
-  margin: 2%;
+  margin-top: 7%;
+  margin: 0%;
   cursor: pointer;
+  padding: 6px;
+  float: left;
+  width: 20%;
 }
 
+.userNav:hover {
+  color: white;
+}
+.containerr {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  border: 3px solid #030500;
+  padding: 10px;
+}
 .userNava:hover {
   color: white;
 }
@@ -98,7 +125,4 @@ body {
 
 #homeBtn:hover {
   color: white;
-}
-.title{
-  font-family: "Lucida Console", "Courier New", monospace;
 }

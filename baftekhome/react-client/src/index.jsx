@@ -16,6 +16,7 @@ class App extends React.Component {
     this.changeView = this.changeView.bind(this);
     this.logOut = this.logOut.bind(this);
     this.getUserHomes = this.getUserHomes.bind(this);
+    this.pushUsreHomes = this.pushUsreHomes.bind(this);
   }
   changeView(view) {
     this.setState({ view: view });
@@ -32,8 +33,13 @@ class App extends React.Component {
         });
       });
   }
+  pushUsreHomes(home) {
+    var arr = this.state.userHomes;
+    arr.push(home.data);
+    this.setState({ userHomes: arr });
+  }
 
-  componentWillMount() {
+  componentDidMount() {
     var token = window.localStorage.getItem("accessToken");
     if (token) {
       axios
@@ -42,7 +48,6 @@ class App extends React.Component {
           this.setState({ user: data.data });
         })
         .then(() => {
-          console.log(this.state.user);
           this.getUserHomes();
         })
         .catch((err) => {
@@ -53,6 +58,7 @@ class App extends React.Component {
 
   logOut() {
     this.setState({ user: undefined });
+    this.setState({ view: "home" });
     window.localStorage.setItem("accessToken", undefined);
   }
 
@@ -73,6 +79,7 @@ class App extends React.Component {
           user={this.state.user}
           userHomes={this.state.userHomes}
           getUserHomes={this.getUserHomes}
+          pushUsreHomes={this.pushUsreHomes}
         />
       </div>
     );

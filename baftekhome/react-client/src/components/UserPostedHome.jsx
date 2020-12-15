@@ -16,11 +16,16 @@ class UserPostedHome extends React.Component {
       return (
         <div>
           <img src={this.props.home.image} />
-          <h2>Apartment for Sale at {this.props.home.location}</h2>
-          <h2>Categroy: {this.props.home.category}</h2>
-          <h4>Description: {this.props.home.description}</h4>
-          <h4>Price: {this.props.home.price}$</h4>
-          <h4>Contact Information: {this.props.home.contactInformation}</h4>
+          <h2>Apartment for Sale at :</h2>
+            <h4>{this.props.home.location}</h4>
+            <h2>Categroy: </h2>
+            <h4>{this.props.home.category}</h4>
+            <h2>Description:</h2>
+            <h4> {this.props.home.description}</h4>
+            <h2>Price:</h2>
+            <h4> {this.props.home.price}$</h4>
+            <h2>Contact Information: </h2>
+            <h4>{this.props.home.contactInformation}</h4>
           <br></br>
           <button
             type="submit"
