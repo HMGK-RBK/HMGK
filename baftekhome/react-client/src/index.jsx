@@ -33,7 +33,7 @@ class App extends React.Component {
       });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     var token = window.localStorage.getItem("accessToken");
     if (token) {
       axios
@@ -42,7 +42,6 @@ class App extends React.Component {
           this.setState({ user: data.data });
         })
         .then(() => {
-          console.log(this.state.user);
           this.getUserHomes();
         })
         .catch((err) => {
@@ -53,6 +52,7 @@ class App extends React.Component {
 
   logOut() {
     this.setState({ user: undefined });
+    this.setState({ view: "home" });
     window.localStorage.setItem("accessToken", undefined);
   }
 

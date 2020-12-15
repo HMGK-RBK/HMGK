@@ -6,6 +6,7 @@ import axios from "axios";
 import LogIn from "./login.jsx";
 import SignUp from "./signUp.jsx";
 import UserPostedHome from "./UserPostedHome.jsx";
+import Logo from "./logo.jsx";
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Home extends React.Component {
     this.updateHome = this.updateHome.bind(this);
     this.deleteHome = this.deleteHome.bind(this);
     this.getAllHomeImgs = this.getAllHomeImgs.bind(this);
+    this.getHomes = this.getHomes.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +33,12 @@ class Home extends React.Component {
 
   fetchHomes() {
     return axios.get("/api/homes");
+  }
+
+  getHomes(home) {
+    var arr = this.state.homes;
+    arr.push(home.data);
+    this.setState({ homes: arr });
   }
 
   updateHome(id, location, category, desc, price, x, y, z) {
@@ -86,7 +94,7 @@ class Home extends React.Component {
           this.setState({
             homes: data
           });
-          this.props.changeView("home");
+          this.props.changeView("list");
         });
       });
     });
@@ -118,7 +126,7 @@ class Home extends React.Component {
   }
 
   render() {
-    if (this.props.view === "home") {
+    if (this.props.view === "list") {
       return (
         <div>
           {this.state.homes.map((home, index) => (
@@ -148,6 +156,7 @@ class Home extends React.Component {
             fetchHomes={this.fetchHomes}
             getAllHomeImgs={this.getAllHomeImgs}
             changeView={this.props.changeView}
+            getHomes={this.getHomes}
           />
         </div>
       );
@@ -181,6 +190,8 @@ class Home extends React.Component {
           ))}
         </div>
       );
+    } else if (this.props.view === "home") {
+      return <Logo changeView={this.props.changeView} />;
     }
   }
 }
