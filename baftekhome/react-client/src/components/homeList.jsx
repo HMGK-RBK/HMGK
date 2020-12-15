@@ -8,6 +8,7 @@ class Homelist extends React.Component {
 
   render() {
     return (
+
       <div className = 'containerr'>
         <img className='img'
           src={this.props.home.image}
@@ -24,6 +25,7 @@ class Homelist extends React.Component {
         <h4>{this.props.home.price} $ </h4>
         <h2  >Contact Information: </h2>
         <h4>{this.props.home.contactInformation}</h4>
+
       </div>
     );
   }

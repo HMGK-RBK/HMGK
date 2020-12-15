@@ -13,7 +13,7 @@ const Image = require("../database/images.js");
 mongoose.set("useCreateIndex", true);
 mongoose.connect(
   "mongodb+srv://hbib:hbib@cluster0.m3m3t.mongodb.net/BaftekHome?retryWrites=true&w=majority",
-  { 
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
@@ -44,7 +44,6 @@ app.post("/api/newuser", (req, res) => {
     });
   });
 });
-
 
 
 app.post("/api/users", (req, res) => {
@@ -84,6 +83,20 @@ app.post("/checkToken", (req, res) => {
         });
       });
     }
+  });
+});
+
+app.put("/updateHome/:id", (req, res) => {
+  Home.findByIdAndUpdate(req.params.id, req.body, (err, docs) => {
+    if (err) console.log(err);
+    res.send(docs);
+  });
+});
+
+app.put("/updateImg/:id", (req, res) => {
+  Image.findOneAndUpdate({ homeID: req.params.id }, req.body, (err, docs) => {
+    if (err) console.log(err);
+    res.send(docs);
   });
 });
 
