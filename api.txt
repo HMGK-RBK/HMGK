@@ -1,0 +1,121 @@
+GET ALL HOMES:
+
+get request to '/api/homes'
+
+output will be like so: 
+[
+  {
+    example: example
+  },
+  {
+    example: example
+  }
+]
+
+======================================================
+======================================================
+
+GET HOME BY ID:
+
+get request to '/api/homes/id'
+
+output will be an array containing the searched homes
+
+======================================================
+======================================================
+
+GET ALL USERS:
+
+get request to '/api/users'
+
+output will be an array containing all the users
+
+=====================================================
+=====================================================
+
+GET ALL USER HOMES POSTED BY USER:
+
+get request to '/api/userHomes/:firstName'
+
+output will be an array containing all the homes that user have posted 
+
+=====================================================
+=====================================================
+
+GET ALL IMAGES OF HOME BY ID /
+
+get request to '/api/images/:_id'
+
+output will be an array containing all the images of one home 
+
+=====================================================
+=====================================================
+
+CREATE A USER 
+
+post request '/api/newuser' 
+
+output will be an array containing the user
+
+=====================================================
+=====================================================
+
+LOGIN AND COMPARE THE EMAIL AND PASSWORD
+
+post request '/api/users'
+
+output will be an array containing the user that was compared in the data base 
+
+=====================================================
+=====================================================
+
+VERIFY IF THE SAME USER IS CONNECTING OR NOT USING THE TOKEN 
+
+post request '/checkToken'
+
+output will be an array containing the user info
+
+=====================================================
+=====================================================
+
+CREATE AND SAVE THE DATA OF IMAGE SEND IT FROM THE USER
+
+post request '/api/images'
+
+output will be an array containing the images of one home
+
+======================================================
+======================================================
+
+CREATE AND SAVE THE USER HOME 
+
+post request '/api/homes'
+
+output will be an array containing the user home info 
+
+=======================================================
+=======================================================
+
+
+UPDATE HOMES BY ID
+
+put request to '/updateHome/id'
+
+output will be an array containing the home with the updated data
+
+=======================================================
+=======================================================
+
+UPDATE IMAGES OF HOMES BY HOME ID
+
+put request to "/api/images/:_id"
+
+output will be an array containing the updated images
+
+=======================================================
+=======================================================
+
+DELETE HOME BY ID
+
+delete request to "/api/homes/:_id"
+
